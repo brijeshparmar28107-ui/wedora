@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Wedora</title>
+    <!-- Google Fonts + Font Awesome (same as existing Wedora design) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ---------- GLOBAL RESET & VARIABLES (preserve Wedora look) ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blush: #f8e8e8;
+            --champagne: #f5e6d3;
+            --gold: #c9a87c;
+            --deep-rose: #b76e79;
+            --charcoal: #2e2e2e;
+            --soft-gray: #f9f7f4;
+            --white: #ffffff;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --border-radius: 24px;
+            --border-radius-sm: 16px;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Jost', sans-serif;
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: linear-gradient(135deg, var(--blush) 0%, var(--champagne) 100%);
+            color: var(--charcoal);
+            line-height: 1.6;
+            font-weight: 400;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ---------- CONTAINER ---------- */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        /* ---------- NAVBAR (simplified, brand only + back link) ---------- */
+        .navbar {
+            padding: 18px 0;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-rose);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            transition: var(--transition);
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: var(--soft-gray);
+        }
+
+        .back-link i {
+            font-size: 0.8rem;
+        }
+
+        .back-link:hover {
+            background: var(--deep-rose);
+            color: white;
+            transform: translateX(-3px);
+        }
+
+        /* ---------- LOGIN SECTION ---------- */
+        .login-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px 64px;
+        }
+
+        .login-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 52px 48px;
+            width: 100%;
+            max-width: 480px;
+            animation: fadeSlideUp 0.6s ease forwards;
+            border: 1px solid rgba(201, 168, 124, 0.12);
+        }
+
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .login-header .brand-icon {
+            font-size: 2.4rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .login-header h1 {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+
+        .login-header p {
+            color: #6b6b6b;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        /* ---------- FORM ---------- */
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+            letter-spacing: 0.2px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i.field-icon {
+            position: absolute;
+            left: 18px;
+            color: #b0b0b0;
+            font-size: 1rem;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 18px 15px 48px;
+            border: 1.5px solid #e8e4df;
+            border-radius: 40px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            background: var(--soft-gray);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--deep-rose);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(183, 110, 121, 0.08);
+        }
+
+        .form-control::placeholder {
+            color: #b0b0b0;
+            font-weight: 300;
+        }
+
+        .form-control.is-invalid {
+            border-color: #d9534f;
+            background: #fff6f6;
+        }
+
+        .form-control.is-invalid:focus {
+            box-shadow: 0 0 0 4px rgba(217, 83, 79, 0.08);
+        }
+
+        /* Password toggle */
+        .password-toggle {
+            position: absolute;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #b0b0b0;
+            font-size: 1.05rem;
+            cursor: pointer;
+            padding: 4px;
+            transition: var(--transition);
+            line-height: 1;
+        }
+
+        .password-toggle:hover {
+            color: var(--deep-rose);
+        }
+
+        /* Error message */
+        .error-message {
+            display: none;
+            color: #d9534f;
+            font-size: 0.82rem;
+            font-weight: 400;
+            margin-top: 6px;
+            margin-left: 18px;
+            letter-spacing: 0.2px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* ---------- FORM OPTIONS ---------- */
+        .form-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #5e5e5e;
+            font-weight: 400;
+            user-select: none;
+        }
+
+        .remember-me input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 1.5px solid #d0ccc7;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            background: var(--soft-gray);
+            flex-shrink: 0;
+        }
+
+        .remember-me input[type="checkbox"]:checked {
+            background: var(--deep-rose);
+            border-color: var(--deep-rose);
+        }
+
+        .remember-me input[type="checkbox"]:checked::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            font-size: 0.65rem;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .forgot-link {
+            font-size: 0.9rem;
+            color: var(--deep-rose);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .forgot-link:hover {
+            color: #a05a64;
+            text-decoration: underline;
+        }
+
+        /* ---------- LOGIN BUTTON ---------- */
+        .btn-login {
+            width: 100%;
+            padding: 16px 34px;
+            border-radius: 40px;
+            background: var(--deep-rose);
+            color: white;
+            border: 1.5px solid var(--deep-rose);
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-login:hover {
+            background: #a05a64;
+            border-color: #a05a64;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* ---------- SIGNUP SECTION ---------- */
+        .signup-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 26px;
+            border-top: 1px solid #eee9e4;
+        }
+
+        .signup-section p {
+            color: #6b6b6b;
+            font-weight: 300;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .signup-link {
+            display: inline-block;
+            padding: 12px 36px;
+            border-radius: 40px;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+        }
+
+        .signup-link:hover {
+            background: var(--gold);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 576px) {
+            .login-card {
+                padding: 36px 24px;
+                border-radius: var(--border-radius-sm);
+            }
+
+            .login-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .back-link span {
+                display: none;
+            }
+
+            .back-link {
+                padding: 8px 12px;
+            }
+
+            .login-section {
+                padding: 32px 16px 48px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .login-card {
+                padding: 28px 18px;
+            }
+
+            .form-control {
+                padding: 13px 14px 13px 42px;
+                font-size: 0.95rem;
+            }
+
+            .input-wrapper i.field-icon {
+                left: 14px;
+                font-size: 0.9rem;
+            }
+
+            .password-toggle {
+                right: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========== NAVBAR (brand + back to home) ========== -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Wedora<span>.</span></a>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- ========== LOGIN SECTION ========== -->
+    <section class="login-section">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-ring brand-icon"></i>
+                <h1>Welcome back</h1>
+                <p>Log in to continue planning your perfect day.</p>
+            </div>
+
+            <form id="loginForm" novalidate>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope field-icon"></i>
+                        <input type="email" id="email" class="form-control" placeholder="you@example.com"
+                            autocomplete="email" required>
+                    </div>
+                    <div class="error-message" id="emailError">Please enter a valid email address.</div>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock field-icon"></i>
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password"
+                            autocomplete="current-password" required>
+                        <button type="button" class="password-toggle" id="togglePassword" aria-label="Show password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="passwordError">Password is required.</div>
+                </div>
+
+                <!-- Options -->
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <!-- Login button -->
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+
+            <!-- Signup -->
+            <div class="signup-section">
+                <p>Don't have an account?</p>
+                <a href="register.html" class="signup-link">Create Account</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        (function () {
+            const loginForm = document.getElementById('loginForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+            const togglePassword = document.getElementById('togglePassword');
+
+            // ----- Password visibility toggle -----
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                const icon = this.querySelector('i');
+                if (type === 'text') {
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                    this.setAttribute('aria-label', 'Hide password');
+                } else {
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                    this.setAttribute('aria-label', 'Show password');
+                }
+            });
+
+            // ----- Validation helpers -----
+            function isValidEmail(email) {
+                // Simple, practical email regex
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function showError(input, errorElement, message) {
+                input.classList.add('is-invalid');
+                errorElement.textContent = message;
+                errorElement.classList.add('show');
+            }
+
+            function clearError(input, errorElement) {
+                input.classList.remove('is-invalid');
+                errorElement.classList.remove('show');
+            }
+
+            // Live validation on input (clear error when user types)
+            emailInput.addEventListener('input', function () {
+                clearError(emailInput, emailError);
+            });
+
+            passwordInput.addEventListener('input', function () {
+                clearError(passwordInput, passwordError);
+            });
+
+            // ----- Form submission -----
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                let isValid = true;
+
+                // Validate email
+                const emailValue = emailInput.value.trim();
+                if (emailValue === '') {
+                    showError(emailInput, emailError, 'Email is required.');
+                    isValid = false;
+                } else if (!isValidEmail(emailValue)) {
+                    showError(emailInput, emailError, 'Please enter a valid email address.');
+                    isValid = false;
+                } else {
+                    clearError(emailInput, emailError);
+                }
+
+                // Validate password
+                const passwordValue = passwordInput.value.trim();
+                if (passwordValue === '') {
+                    showError(passwordInput, passwordError, 'Password is required.');
+                    isValid = false;
+                } else if (passwordValue.length < 6) {
+                    showError(passwordInput, passwordError, 'Password must be at least 6 characters.');
+                    isValid = false;
+                } else {
+                    clearError(passwordInput, passwordError);
+                }
+
+                // If valid, you would normally submit to backend
+                if (isValid) {
+                    // Simulate successful login — ready to connect to real backend later
+                    const submitBtn = loginForm.querySelector('.btn-login');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+                    submitBtn.disabled = true;
+
+                    setTimeout(function () {
+                        // Reset button (in real scenario, redirect to dashboard)
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+
+                        // For demo: show a simple success alert
+                        alert('Login successful! (Demo — connect to your backend here.)');
+
+                        // Optionally redirect to dashboard:
+                        // window.location.href = 'dashboard.html';
+                    }, 1200);
+                }
+            });
+
+            // ----- Quick pre-fill for convenience (optional, can remove) -----
+            // Uncomment if you want to help with testing:
+            // emailInput.value = 'demo@wedora.com';
+            // passwordInput.value = 'password123';
+        })();
+    </script>
+
+</body>
+
+</html>

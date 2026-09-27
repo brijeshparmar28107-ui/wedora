@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedora — Wedding Planner &amp; Dashboard</title>
+  <!-- Google Fonts + Font Awesome (preserve existing design) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- GLOBAL RESET & VARIABLES (preserve Wedora look) ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --blush: #f8e8e8;
+      --champagne: #f5e6d3;
+      --gold: #c9a87c;
+      --deep-rose: #b76e79;
+      --charcoal: #2e2e2e;
+      --soft-gray: #f9f7f4;
+      --white: #ffffff;
+      --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+      --border-radius: 24px;
+      --border-radius-sm: 16px;
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Jost', sans-serif;
+      --transition: all 0.25s ease;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--white);
+      color: var(--charcoal);
+      line-height: 1.6;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ---------- CONTAINER ---------- */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------- BUTTONS (preserve UI) ---------- */
+    .btn {
+      display: inline-block;
+      padding: 14px 34px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      font-family: var(--font-sans);
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--deep-rose);
+      color: white;
+      border-color: var(--deep-rose);
+    }
+
+    .btn-primary:hover {
+      background: #a05a64;
+      border-color: #a05a64;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--charcoal);
+      border: 1.5px solid var(--charcoal);
+    }
+
+    .btn-outline:hover {
+      background: var(--charcoal);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: white;
+      border-color: var(--gold);
+    }
+
+    .btn-gold:hover {
+      background: #b8935f;
+      border-color: #b8935f;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ---------- NAVBAR (responsive, active, hamburger) ---------- */
+    .navbar {
+      padding: 18px 0;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--deep-rose);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-item a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      transition: var(--transition);
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-item a:hover {
+      color: var(--deep-rose);
+    }
+
+    .nav-item.active a {
+      color: var(--deep-rose);
+      font-weight: 600;
+    }
+
+    .nav-item.active a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--deep-rose);
+      border-radius: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-actions .btn {
+      padding: 10px 24px;
+      font-size: 0.9rem;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      color: var(--charcoal);
+      cursor: pointer;
+      padding: 0 8px;
+    }
+
+    /* mobile menu */
+    @media (max-width: 992px) {
+      .nav-menu {
+        position: fixed;
+        top: 78px;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        align-items: center;
+        padding: 28px 20px 36px;
+        gap: 20px;
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-120%);
+        transition: transform 0.35s ease;
+        opacity: 0;
+        pointer-events: none;
+        border-radius: 0 0 32px 32px;
+        z-index: 999;
+      }
+
+      .nav-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .nav-actions {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+      }
+
+      .nav-item a {
+        font-size: 1.15rem;
+        padding: 8px 0;
+      }
+
+      .nav-item.active a::after {
+        bottom: 0;
+      }
+    }
+
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      padding: 70px 0 80px;
+      background: linear-gradient(135deg, var(--blush) 0%, var(--champagne) 100%);
+      border-radius: 0 0 40px 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-serif);
+      font-size: 3.8rem;
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 span {
+      color: var(--deep-rose);
+      font-style: italic;
+    }
+
+    .hero-content p {
+      font-size: 1.15rem;
+      color: #4d4d4d;
+      max-width: 90%;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-image img {
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 520px;
+      object-fit: cover;
+      height: 400px;
+      border: 4px solid white;
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+
+      .hero-content p {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-image img {
+        height: 300px;
+      }
+    }
+
+    /* ---------- SECTION HEADERS ---------- */
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-serif);
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: #6b6b6b;
+      font-size: 1.1rem;
+      font-weight: 300;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ---------- SERVICES SECTION (cards with real href) ---------- */
+    .services {
+      padding: 90px 0 80px;
+      background: var(--white);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--soft-gray);
+      border-radius: var(--border-radius-sm);
+      padding: 36px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(201, 168, 124, 0.15);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--gold);
+    }
+
+    .service-icon {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--charcoal);
+    }
+
+    .service-card p {
+      color: #5e5e5e;
+      font-weight: 300;
+      font-size: 0.98rem;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: var(--deep-rose);
+      transition: var(--transition);
+      font-size: 0.95rem;
+      letter-spacing: 0.3px;
+      align-self: flex-start;
+    }
+
+    .service-link i {
+      transition: var(--transition);
+      font-size: 0.8rem;
+    }
+
+    .service-link:hover {
+      color: #a05a64;
+      gap: 12px;
+    }
+
+    @media (max-width: 992px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- FEATURES SECTION ---------- */
+    .features {
+      padding: 80px 0;
+      background: var(--soft-gray);
+      border-radius: 40px 40px 0 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 48px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 36px 26px;
+      border-radius: var(--border-radius-sm);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .feature-card i {
+      font-size: 2rem;
+      color: var(--deep-rose);
+      margin-bottom: 18px;
+    }
+
+    .feature-card h4 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: #6b6b6b;
+      font-weight: 300;
+      font-size: 0.95rem;
+    }
+
+    .features-cta {
+      text-align: center;
+    }
+
+    @media (max-width: 992px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ---------- DASHBOARD PREVIEW ---------- */
+    .dashboard-preview {
+      padding: 80px 0 90px;
+      background: white;
+    }
+
+    .dashboard-card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      background: var(--blush);
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      align-items: center;
+    }
+
+    .dashboard-content {
+      padding: 56px 48px;
+    }
+
+    .dashboard-content h2 {
+      font-family: var(--font-serif);
+      font-size: 2.6rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--charcoal);
+    }
+
+    .dashboard-content p {
+      font-size: 1.05rem;
+      color: #4d4d4d;
+      margin-bottom: 28px;
+      font-weight: 300;
+      max-width: 90%;
+    }
+
+    .dashboard-image {
+      background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=1740&auto=format&fit=crop') center/cover no-repeat;
+      min-height: 360px;
+      height: 100%;
+      border-radius: 0 36px 36px 0;
+    }
+
+    @media (max-width: 992px) {
+      .dashboard-card {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-image {
+        min-height: 260px;
+        border-radius: 0 0 36px 36px;
+      }
+
+      .dashboard-content {
+        padding: 40px 32px;
+        text-align: center;
+      }
+
+      .dashboard-content p {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    /* ---------- FOOTER (professional, all real links) ---------- */
+    .footer {
+      background: var(--charcoal);
+      color: #dadada;
+      padding: 64px 0 28px;
+      border-radius: 40px 40px 0 0;
+      margin-top: 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand .logo {
+      color: white;
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .footer-brand p {
+      color: #b0b0b0;
+      font-weight: 300;
+      max-width: 280px;
+      font-size: 0.95rem;
+    }
+
+    .footer-col h4 {
+      color: white;
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 22px;
+      letter-spacing: 0.3px;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-col ul li a {
+      color: #b0b0b0;
+      font-weight: 300;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--gold);
+      padding-left: 4px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #3f3f3f;
+      padding-top: 24px;
+      text-align: center;
+      color: #8a8a8a;
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    @media (max-width: 992px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    /* ---------- UTILITY / SMOOTH SCROLL ---------- */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* active nav styling on scroll — handled by JS for demo, but we keep basic active */
+  </style>
+</head>
+
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Wedora<span>.</span></a>
+
+      <nav class="nav-menu" id="navMenu">
+        <li class="nav-item active"><a href="index.html">Home</a></li>
+        <li class="nav-item"><a href="Pages/features.html">Features</a></li>
+        <li class="nav-item"><a href="services/vendors.html">Vendors</a></li>
+        <li class="nav-item"><a href="Pages/about.html">About</a></li>
+        <li class="nav-item"><a href="Pages/contact.html">Contact</a></li>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="register.html" class="btn btn-primary">Get Started</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Plan your <span>dream wedding</span> with ease</h1>
+        <p>Wedora brings everything together — budget, guests, vendors, and checklists — in one beautiful dashboard.</p>
+        <div class="hero-buttons">
+          <a href="register.html" class="btn btn-primary">Start Planning</a>
+          <a href="Pages/features.html" class="btn btn-outline">Explore Features</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=1740&auto=format&fit=crop"
+          alt="Wedding planning inspiration">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>Everything you need</h2>
+        <p>From budgeting to invitations — manage every detail with confidence.</p>
+      </div>
+      <div class="services-grid">
+        <!-- Budget Planning -->
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-coins"></i></div>
+          <h3>Budget Planning</h3>
+          <p>Track expenses, set limits, and get real-time insights to stay on budget.</p>
+          <a href="services/budget.html" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- Guest Management -->
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-users"></i></div>
+          <h3>Guest Management</h3>
+          <p>Organize RSVPs, seating, and guest preferences effortlessly.</p>
+          <a href="services/guests.html" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- Vendor Management -->
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-store"></i></div>
+          <h3>Vendor Management</h3>
+          <p>Compare, book, and communicate with top wedding vendors.</p>
+          <a href="services/vendors.html" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- Wedding Checklist -->
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-list-check"></i></div>
+          <h3>Wedding Checklist</h3>
+          <p>Never miss a task — personalized timelines and reminders.</p>
+          <a href="services/checklist.html" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- Catering & Menu -->
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-utensils"></i></div>
+          <h3>Catering &amp; Menu</h3>
+          <p>Curate menus, manage tastings, and coordinate with caterers.</p>
+          <a href="services/catering.html" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!-- Invitations -->
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-envelope-open-text"></i></div>
+          <h3>Invitations</h3>
+          <p>Design, send, and track digital and printed invitations.</p>
+          <a href="services/invitations.html" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURES ========== -->
+  <section class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why couples love Wedora</h2>
+        <p>Smart tools that take the stress out of wedding planning.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-calendar-alt"></i>
+          <h4>Timeline Sync</h4>
+          <p>All tasks, events, and deadlines in one unified calendar.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-chart-pie"></i>
+          <h4>Budget Analytics</h4>
+          <p>Visual breakdowns and spending alerts to keep you on track.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-handshake"></i>
+          <h4>Vendor Collaboration</h4>
+          <p>Share mood boards, contracts, and messages seamlessly.</p>
+        </div>
+      </div>
+      <div class="features-cta">
+        <a href="Pages/features.html" class="btn btn-gold">Explore All Features</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DASHBOARD PREVIEW ========== -->
+  <section class="dashboard-preview">
+    <div class="container">
+      <div class="dashboard-card">
+        <div class="dashboard-content">
+          <h2>Your wedding dashboard</h2>
+          <p>See everything at a glance — budget status, guest list, vendor bookings, and upcoming tasks.</p>
+          <a href="dashboard.html" class="btn btn-primary">Go to Dashboard</a>
+        </div>
+        <div class="dashboard-image" role="img" aria-label="Wedding dashboard preview"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">Wedora<span>.</span></a>
+          <p>Plan your dream wedding with ease. Everything you need, beautifully organized.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Pages/features.html">Features</a></li>
+            <li><a href="services/vendors.html">Vendors</a></li>
+            <li><a href="Pages/about.html">About</a></li>
+            <li><a href="Pages/contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services/budget.html">Budget Planning</a></li>
+            <li><a href="services/guests.html">Guest Management</a></li>
+            <li><a href="services/vendors.html">Vendor Management</a></li>
+            <li><a href="services/checklist.html">Wedding Checklist</a></li>
+            <li><a href="services/catering.html">Catering</a></li>
+            <li><a href="services/invitations.html">Invitations</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Account</h4>
+          <ul>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Wedora. All rights reserved. Designed with love.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== JAVASCRIPT (mobile menu smooth toggle) ========== -->
+  <script>
+    (function () {
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('navMenu');
+      const mobileOnlyItems = document.querySelectorAll('.mobile-only');
+
+      // Show mobile-only items only on small screens (or toggle via CSS)
+      function updateMobileOnlyDisplay() {
+        if (window.innerWidth <= 992) {
+          mobileOnlyItems.forEach(el => el.style.display = 'block');
+        } else {
+          mobileOnlyItems.forEach(el => el.style.display = 'none');
+        }
+      }
+      updateMobileOnlyDisplay();
+      window.addEventListener('resize', updateMobileOnlyDisplay);
+
+      // toggle menu
+      hamburger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        navMenu.classList.toggle('open');
+        // change icon
+        const icon = hamburger.querySelector('i');
+        if (navMenu.classList.contains('open')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-times');
+        } else {
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+      });
+
+      // close menu when clicking any nav link (except maybe the button inside? we want to close on all)
+      const navLinks = navMenu.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function () {
+          if (window.innerWidth <= 992) {
+            navMenu.classList.remove('open');
+            const icon = hamburger.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+      });
+
+      // close menu when clicking outside (optional)
+      document.addEventListener('click', function (event) {
+        if (window.innerWidth <= 992 && navMenu.classList.contains('open')) {
+          const isClickInsideMenu = navMenu.contains(event.target);
+          const isClickOnHamburger = hamburger.contains(event.target);
+          if (!isClickInsideMenu && !isClickOnHamburger) {
+            navMenu.classList.remove('open');
+            const icon = hamburger.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        }
+      });
+
+      // Active link highlighting (simple: based on current page)
+      const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      const navItems = document.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        const link = item.querySelector('a');
+        if (link) {
+          const href = link.getAttribute('href');
+          if (href === currentPage) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        }
+      });
+      // ensure Home is active if index
+      if (currentPage === 'index.html' || currentPage === '') {
+        document.querySelector('.nav-item:first-child')?.classList.add('active');
+      }
+    })();
+  </script>
+
+  <!-- ensure smooth scroll only for same-page anchors (we have none) -->
+</body>
+
+</html>

@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications — Wedora</title>
+    <!-- Google Fonts + Font Awesome (same as existing Wedora design) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================================
+       GLOBAL RESET & VARIABLES (preserve Wedora look)
+       ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blush: #f8e8e8;
+            --champagne: #f5e6d3;
+            --gold: #c9a87c;
+            --deep-rose: #b76e79;
+            --charcoal: #2e2e2e;
+            --soft-gray: #f9f7f4;
+            --white: #ffffff;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.12);
+            --border-radius: 24px;
+            --border-radius-sm: 16px;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Jost', sans-serif;
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--soft-gray);
+            color: var(--charcoal);
+            line-height: 1.6;
+            font-weight: 400;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ============================================================
+       CONTAINER
+       ============================================================ */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        /* ============================================================
+       NAVBAR — MASTER HEADER
+       ============================================================ */
+        .navbar {
+            padding: 18px 0;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-rose);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-item a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            transition: var(--transition);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-item a:hover {
+            color: var(--deep-rose);
+        }
+
+        .nav-item.active a {
+            color: var(--deep-rose);
+            font-weight: 600;
+        }
+
+        .nav-item.active a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--deep-rose);
+            border-radius: 2px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1.5px solid transparent;
+            font-family: var(--font-sans);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--deep-rose);
+            color: white;
+            border-color: var(--deep-rose);
+        }
+
+        .btn-primary:hover {
+            background: #a05a64;
+            border-color: #a05a64;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--charcoal);
+            border: 1.5px solid var(--charcoal);
+        }
+
+        .btn-outline:hover {
+            background: var(--charcoal);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-sm {
+            padding: 9px 18px;
+            font-size: 0.85rem;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+
+        .btn-gold:hover {
+            background: #b8935f;
+            border-color: #b8935f;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--charcoal);
+            cursor: pointer;
+            padding: 0 8px;
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 78px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 28px 20px 36px;
+                gap: 20px;
+                box-shadow: var(--shadow-lg);
+                transform: translateY(-120%);
+                transition: transform 0.35s ease;
+                opacity: 0;
+                pointer-events: none;
+                border-radius: 0 0 32px 32px;
+                z-index: 999;
+            }
+
+            .nav-menu.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-item a {
+                font-size: 1.15rem;
+                padding: 8px 0;
+            }
+        }
+
+        /* ============================================================
+       PAGE HEADER
+       ============================================================ */
+        .page-header {
+            background: linear-gradient(135deg, var(--blush) 0%, var(--champagne) 100%);
+            padding: 56px 0 64px;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(201, 168, 124, 0.22) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -60px;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(183, 110, 121, 0.14) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #8a8a8a;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb a {
+            color: var(--deep-rose);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb i {
+            font-size: 0.65rem;
+            color: #b0b0b0;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .header-text h1 {
+            font-family: var(--font-serif);
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+            line-height: 1.15;
+        }
+
+        .header-text p {
+            color: #5e5e5e;
+            font-weight: 300;
+            font-size: 1.05rem;
+            max-width: 620px;
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--white);
+            padding: 14px 22px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(201, 168, 124, 0.15);
+            flex-shrink: 0;
+        }
+
+        .header-badge .badge-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: var(--blush);
+            color: var(--deep-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            position: relative;
+        }
+
+        .header-badge .badge-icon::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 8px;
+            height: 8px;
+            background: var(--deep-rose);
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.25);
+                opacity: 0.85;
+            }
+        }
+
+        .header-badge .badge-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .header-badge .badge-text .num {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .header-badge .badge-text .lbl {
+            font-size: 0.72rem;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 640px) {
+            .page-header {
+                padding: 44px 0 52px;
+            }
+
+            .header-text h1 {
+                font-size: 2rem;
+            }
+
+            .header-text p {
+                font-size: 0.98rem;
+            }
+
+            .header-flex {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-badge {
+                padding: 12px 18px;
+            }
+        }
+
+        /* ============================================================
+       MAIN WRAPPER
+       ============================================================ */
+        .notifications-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 24px 60px;
+        }
+
+        /* ============================================================
+       SUMMARY CARDS
+       ============================================================ */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        @media (max-width: 992px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .summary-card {
+            background: var(--white);
+            border-radius: var(--border-radius-sm);
+            padding: 22px 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(201, 168, 124, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .summary-card.total::before {
+            background: var(--gold);
+        }
+
+        .summary-card.unread::before {
+            background: var(--deep-rose);
+        }
+
+        .summary-card.important::before {
+            background: #d98c3f;
+        }
+
+        .summary-card.updates::before {
+            background: #4a7bd8;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold);
+        }
+
+        .summary-card.active {
+            border-color: var(--deep-rose);
+            box-shadow: 0 0 0 2px rgba(183, 110, 121, 0.15), var(--shadow-md);
+        }
+
+        .summary-card .sc-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+        }
+
+        .summary-card.total .sc-icon {
+            background: #fdf0e6;
+            color: #d98c3f;
+        }
+
+        .summary-card.unread .sc-icon {
+            background: #ffeae8;
+            color: var(--deep-rose);
+        }
+
+        .summary-card.important .sc-icon {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .summary-card.updates .sc-icon {
+            background: #e8f0fe;
+            color: #4a7bd8;
+        }
+
+        .summary-card .sc-num {
+            font-family: var(--font-serif);
+            font-size: 1.9rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            line-height: 1.1;
+        }
+
+        .summary-card .sc-lbl {
+            font-size: 0.82rem;
+            color: #8a8a8a;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        /* ============================================================
+       FILTER BAR
+       ============================================================ */
+        .filter-bar {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 20px 22px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(201, 168, 124, 0.12);
+            margin-bottom: 20px;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 220px;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b0b0b0;
+            font-size: 0.92rem;
+            pointer-events: none;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 18px 12px 44px;
+            border: 1.5px solid #e8e4df;
+            border-radius: 14px;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            color: var(--charcoal);
+            background: var(--soft-gray);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .search-box input:focus {
+            border-color: var(--deep-rose);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(183, 110, 121, 0.08);
+        }
+
+        .search-row .btn {
+            padding: 12px 22px;
+            font-size: 0.88rem;
+            white-space: nowrap;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1.5px solid #e8e4df;
+            background: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .filter-chip:hover {
+            border-color: var(--gold);
+            color: var(--deep-rose);
+        }
+
+        .filter-chip.active {
+            background: var(--deep-rose);
+            color: white;
+            border-color: var(--deep-rose);
+        }
+
+        .filter-chip i {
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 640px) {
+            .search-row {
+                flex-direction: column;
+            }
+
+            .search-row .btn {
+                width: 100%;
+            }
+
+            .filter-chips {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+            }
+
+            .filter-chips::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .filter-chips::-webkit-scrollbar-thumb {
+                background: #d9d2c8;
+                border-radius: 2px;
+            }
+        }
+
+        /* ============================================================
+       BULK ACTIONS BAR
+       ============================================================ */
+        .bulk-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .bulk-bar .status-text {
+            font-size: 0.88rem;
+            color: #6b6b6b;
+        }
+
+        .bulk-bar .status-text strong {
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        .bulk-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .bulk-actions button {
+            padding: 8px 14px;
+            border-radius: 30px;
+            border: 1.5px solid #e8e4df;
+            background: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bulk-actions button:hover {
+            border-color: var(--deep-rose);
+            color: var(--deep-rose);
+        }
+
+        .bulk-actions button i {
+            font-size: 0.78rem;
+        }
+
+        /* Refresh spin animation */
+        .refresh-btn.spinning i {
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ============================================================
+       NOTIFICATION LIST
+       ============================================================ */
+        .notif-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 200px;
+        }
+
+        .notif-card {
+            background: var(--white);
+            border-radius: var(--border-radius-sm);
+            padding: 18px 22px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(201, 168, 124, 0.12);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            animation: fadeInUp 0.3s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .notif-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .notif-card.unread {
+            background: linear-gradient(135deg, #fffafa 0%, #fff6f6 100%);
+            border-color: rgba(183, 110, 121, 0.22);
+        }
+
+        .notif-card.unread::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 0;
+            width: 4px;
+            height: calc(100% - 36px);
+            background: linear-gradient(180deg, var(--deep-rose), var(--gold));
+            border-radius: 0 4px 4px 0;
+        }
+
+        .notif-card.important {
+            border-color: rgba(217, 140, 63, 0.35);
+        }
+
+        .notif-card.important::after {
+            content: '★';
+            position: absolute;
+            top: 14px;
+            right: 60px;
+            color: #d98c3f;
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+
+        .notif-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: var(--blush);
+            color: var(--deep-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .notif-card:hover .notif-icon {
+            background: var(--deep-rose);
+            color: white;
+            transform: scale(1.06);
+        }
+
+        .notif-card.unread .notif-icon {
+            background: var(--deep-rose);
+            color: white;
+        }
+
+        .notif-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .notif-title-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+
+        .notif-title {
+            font-family: var(--font-serif);
+            font-size: 1.12rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            line-height: 1.3;
+        }
+
+        .notif-cat-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            background: var(--soft-gray);
+            color: #6b6b6b;
+            white-space: nowrap;
+        }
+
+        .notif-cat-badge.guest {
+            background: #e8f0fe;
+            color: #4a7bd8;
+        }
+
+        .notif-cat-badge.budget {
+            background: #fdf0e6;
+            color: #d98c3f;
+        }
+
+        .notif-cat-badge.vendor {
+            background: #f3e8ff;
+            color: #8e44ad;
+        }
+
+        .notif-cat-badge.checklist {
+            background: #e8f5e9;
+            color: #43a047;
+        }
+
+        .notif-cat-badge.payment {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .notif-cat-badge.invitation {
+            background: #fce4ec;
+            color: #c2185b;
+        }
+
+        .notif-cat-badge.planning {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .notif-cat-badge.system {
+            background: #f5f5f5;
+            color: #616161;
+        }
+
+        .notif-desc {
+            font-size: 0.88rem;
+            color: #6b6b6b;
+            font-weight: 300;
+            line-height: 1.55;
+            margin-bottom: 8px;
+        }
+
+        .notif-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.76rem;
+            color: #8a8a8a;
+            flex-wrap: wrap;
+        }
+
+        .notif-meta .time {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .notif-meta .time i {
+            font-size: 0.7rem;
+            color: var(--gold);
+        }
+
+        .notif-meta .unread-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--deep-rose);
+            font-weight: 600;
+        }
+
+        .notif-meta .unread-indicator::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--deep-rose);
+            display: inline-block;
+        }
+
+        .notif-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .notif-view-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1.5px solid #e8e4df;
+            background: var(--white);
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .notif-view-btn:hover {
+            border-color: var(--deep-rose);
+            color: var(--deep-rose);
+            background: var(--blush);
+        }
+
+        .notif-dots {
+            background: none;
+            border: none;
+            color: #b0b0b0;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            line-height: 1;
+        }
+
+        .notif-dots:hover {
+            color: var(--deep-rose);
+            background: var(--soft-gray);
+        }
+
+        .notif-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 6px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(201, 168, 124, 0.15);
+            padding: 6px 0;
+            min-width: 170px;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: var(--transition);
+        }
+
+        .notif-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .notif-menu button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 9px 16px;
+            border: none;
+            background: none;
+            font-family: var(--font-sans);
+            font-size: 0.82rem;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+        }
+
+        .notif-menu button:hover {
+            background: var(--soft-gray);
+            color: var(--deep-rose);
+        }
+
+        .notif-menu button i {
+            width: 16px;
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        .notif-menu button.danger:hover {
+            color: #d9534f;
+        }
+
+        .notif-menu button.danger:hover i {
+            color: #d9534f;
+        }
+
+        .notif-menu .divider {
+            height: 1px;
+            background: #f0ebe5;
+            margin: 4px 0;
+        }
+
+        @media (max-width: 560px) {
+            .notif-card {
+                padding: 16px;
+                gap: 12px;
+            }
+
+            .notif-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 0.95rem;
+                border-radius: 12px;
+            }
+
+            .notif-title {
+                font-size: 1rem;
+            }
+
+            .notif-desc {
+                font-size: 0.83rem;
+            }
+
+            .notif-actions {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .notif-card.important::after {
+                right: 50px;
+            }
+        }
+
+        /* ============================================================
+       EMPTY STATE
+       ============================================================ */
+        .empty-state {
+            text-align: center;
+            padding: 80px 24px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(201, 168, 124, 0.12);
+        }
+
+        .empty-state .empty-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--blush);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2.5rem;
+            color: var(--deep-rose);
+            animation: floatEmpty 3s ease-in-out infinite;
+        }
+
+        @keyframes floatEmpty {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .empty-state h3 {
+            font-family: var(--font-serif);
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            color: #7a7a7a;
+            font-weight: 300;
+            font-size: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* ============================================================
+       LOAD MORE
+       ============================================================ */
+        .load-more-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .load-more-btn {
+            padding: 12px 32px;
+            border-radius: 40px;
+            border: 1.5px solid var(--deep-rose);
+            background: var(--white);
+            color: var(--deep-rose);
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .load-more-btn:hover {
+            background: var(--deep-rose);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .load-more-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .load-more-status {
+            font-size: 0.82rem;
+            color: #8a8a8a;
+        }
+
+        /* ============================================================
+       TOAST
+       ============================================================ */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: var(--charcoal);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 14px;
+            box-shadow: var(--shadow-xl);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 3000;
+            transform: translateY(120%);
+            transition: transform 0.35s ease;
+            max-width: 360px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        .toast i {
+            color: var(--gold);
+        }
+
+        @media (max-width: 640px) {
+            .toast {
+                right: 16px;
+                left: 16px;
+                max-width: none;
+            }
+        }
+
+        /* ============================================================
+       FOOTER — MASTER FOOTER FROM index.html
+       ============================================================ */
+        .footer {
+            background: var(--charcoal);
+            color: #dadada;
+            padding: 64px 0 28px;
+            border-radius: 40px 40px 0 0;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            color: #b0b0b0;
+            font-weight: 300;
+            max-width: 280px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #b0b0b0;
+            font-weight: 300;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #3f3f3f;
+            padding-top: 24px;
+            text-align: center;
+            color: #8a8a8a;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+       NAVBAR — MASTER HEADER (Home | Features | Vendors | About | Contact)
+       notifications.html is in root, so paths are direct
+       ============================================================ -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Wedora<span>.</span></a>
+
+            <nav class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="Pages/features.html">Features</a></li>
+                <li class="nav-item"><a href="services/vendors.html">Vendors</a></li>
+                <li class="nav-item"><a href="Pages/about.html">About</a></li>
+                <li class="nav-item"><a href="Pages/contact.html">Contact</a></li>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Get Started</a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+    <section class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="dashboard.html">Dashboard</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Notifications</span>
+            </div>
+            <div class="header-flex">
+                <div class="header-text">
+                    <h1>Notifications</h1>
+                    <p>Stay updated with everything happening in your wedding planning journey.</p>
+                </div>
+                <div class="header-badge">
+                    <div class="badge-icon"><i class="fas fa-bell"></i></div>
+                    <div class="badge-text">
+                        <span class="num" id="headerUnreadCount">12</span>
+                        <span class="lbl">new notifications</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+    <main class="notifications-wrapper">
+
+        <!-- ========== SUMMARY CARDS ========== -->
+        <section class="summary-grid">
+            <div class="summary-card total active" data-summary="all">
+                <div class="sc-icon"><i class="fas fa-bell"></i></div>
+                <div class="sc-num" id="sumAll">0</div>
+                <div class="sc-lbl">All Notifications</div>
+            </div>
+            <div class="summary-card unread" data-summary="unread">
+                <div class="sc-icon"><i class="fas fa-envelope"></i></div>
+                <div class="sc-num" id="sumUnread">0</div>
+                <div class="sc-lbl">Unread</div>
+            </div>
+            <div class="summary-card important" data-summary="important">
+                <div class="sc-icon"><i class="fas fa-star"></i></div>
+                <div class="sc-num" id="sumImportant">0</div>
+                <div class="sc-lbl">Important</div>
+            </div>
+            <div class="summary-card updates" data-summary="updates">
+                <div class="sc-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="sc-num" id="sumUpdates">0</div>
+                <div class="sc-lbl">Planning Updates</div>
+            </div>
+        </section>
+
+        <!-- ========== FILTER BAR ========== -->
+        <section class="filter-bar">
+            <div class="search-row">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search notifications...">
+                </div>
+                <button class="btn btn-primary" id="markAllBtn">
+                    <i class="fas fa-check-double"></i> Mark all as read
+                </button>
+            </div>
+            <div class="filter-chips" id="filterChips">
+                <button class="filter-chip active" data-filter="all">
+                    <i class="fas fa-th-large"></i> All
+                </button>
+                <button class="filter-chip" data-filter="unread">
+                    <i class="fas fa-envelope"></i> Unread
+                </button>
+                <button class="filter-chip" data-filter="important">
+                    <i class="fas fa-star"></i> Important
+                </button>
+                <button class="filter-chip" data-filter="planning">
+                    <i class="fas fa-calendar-check"></i> Wedding Planning
+                </button>
+                <button class="filter-chip" data-filter="vendor">
+                    <i class="fas fa-store"></i> Vendors
+                </button>
+                <button class="filter-chip" data-filter="guest">
+                    <i class="fas fa-users"></i> Guests
+                </button>
+                <button class="filter-chip" data-filter="budget">
+                    <i class="fas fa-wallet"></i> Budget
+                </button>
+                <button class="filter-chip" data-filter="checklist">
+                    <i class="fas fa-list-check"></i> Checklist
+                </button>
+                <button class="filter-chip" data-filter="system">
+                    <i class="fas fa-cog"></i> System
+                </button>
+            </div>
+        </section>
+
+        <!-- ========== BULK ACTIONS ========== -->
+        <div class="bulk-bar">
+            <div class="status-text">
+                <strong id="visibleCount">0</strong> notifications
+                <span id="filterLabelText">(all)</span>
+            </div>
+            <div class="bulk-actions">
+                <button id="clearReadBtn">
+                    <i class="fas fa-trash-alt"></i> Clear read
+                </button>
+                <button id="refreshBtn" class="refresh-btn">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- ========== NOTIFICATION LIST ========== -->
+        <div class="notif-list" id="notifList">
+            <!-- Rendered by JS -->
+        </div>
+
+        <!-- ========== LOAD MORE ========== -->
+        <div class="load-more-wrap" id="loadMoreWrap">
+            <button class="load-more-btn" id="loadMoreBtn">
+                <i class="fas fa-plus-circle"></i> Load More Notifications
+            </button>
+            <div class="load-more-status" id="loadMoreStatus">Showing 16 of 24 notifications</div>
+        </div>
+
+    </main>
+
+    <!-- ============================================================
+       FOOTER — MASTER FOOTER FROM index.html
+       ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Wedora<span>.</span></a>
+                    <p>Plan your dream wedding with ease. Everything you need, beautifully organized.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Pages/features.html">Features</a></li>
+                        <li><a href="services/vendors.html">Vendors</a></li>
+                        <li><a href="Pages/about.html">About</a></li>
+                        <li><a href="Pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services/budget.html">Budget Planning</a></li>
+                        <li><a href="services/guests.html">Guest Management</a></li>
+                        <li><a href="services/vendors.html">Vendor Management</a></li>
+                        <li><a href="services/checklist.html">Wedding Checklist</a></li>
+                        <li><a href="services/catering.html">Catering</a></li>
+                        <li><a href="services/invitations.html">Invitations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Wedora. All rights reserved. Designed with love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastText">Done!</span>
+    </div>
+
+    <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+    <script>
+        (function () {
+            'use strict';
+
+            /* ==========================================================
+               NOTIFICATION DATA (frontend only, no backend)
+               ========================================================== */
+            const BASE_NOTIFICATIONS = [
+                {
+                    id: 'n1',
+                    icon: 'fa-user-plus',
+                    category: 'guest',
+                    title: '5 new guests added',
+                    desc: 'You added 5 guests to your wedding guest list.',
+                    time: '2 hours ago',
+                    unread: true,
+                    important: false
+                },
+                {
+                    id: 'n2',
+                    icon: 'fa-utensils',
+                    category: 'budget',
+                    title: 'Catering budget updated',
+                    desc: 'Your catering budget has been updated to ₹1.8L.',
+                    time: '5 hours ago',
+                    unread: true,
+                    important: false
+                },
+                {
+                    id: 'n3',
+                    icon: 'fa-camera',
+                    category: 'vendor',
+                    title: 'Photographer booked',
+                    desc: 'Lens & Light Studio has been marked as booked.',
+                    time: 'Yesterday',
+                    unread: false,
+                    important: true
+                },
+                {
+                    id: 'n4',
+                    icon: 'fa-list-check',
+                    category: 'checklist',
+                    title: '3 checklist tasks completed',
+                    desc: 'You completed 3 important wedding planning tasks.',
+                    time: 'Yesterday',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n5',
+                    icon: 'fa-building',
+                    category: 'planning',
+                    title: 'Venue task reminder',
+                    desc: 'Your venue selection task is still pending.',
+                    time: 'Yesterday',
+                    unread: true,
+                    important: true
+                },
+                {
+                    id: 'n6',
+                    icon: 'fa-credit-card',
+                    category: 'payment',
+                    title: 'Payment reminder',
+                    desc: 'A vendor payment of ₹25,000 is due soon.',
+                    time: '2 days ago',
+                    unread: true,
+                    important: true
+                },
+                {
+                    id: 'n7',
+                    icon: 'fa-envelope-open-text',
+                    category: 'invitation',
+                    title: 'Invitation design updated',
+                    desc: 'Your wedding invitation design has been updated successfully.',
+                    time: '2 days ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n8',
+                    icon: 'fa-utensils',
+                    category: 'planning',
+                    title: 'Catering menu updated',
+                    desc: 'Your catering menu has been updated with new food options.',
+                    time: '3 days ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n9',
+                    icon: 'fa-users',
+                    category: 'guest',
+                    title: 'Guest RSVP received',
+                    desc: 'A guest has confirmed their attendance.',
+                    time: '3 days ago',
+                    unread: true,
+                    important: false
+                },
+                {
+                    id: 'n10',
+                    icon: 'fa-store',
+                    category: 'vendor',
+                    title: 'New vendor added',
+                    desc: 'A new vendor has been added to your wedding planning list.',
+                    time: '4 days ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n11',
+                    icon: 'fa-list-check',
+                    category: 'checklist',
+                    title: 'Checklist reminder',
+                    desc: 'You have 6 pending tasks in your wedding checklist.',
+                    time: '5 days ago',
+                    unread: true,
+                    important: false
+                },
+                {
+                    id: 'n12',
+                    icon: 'fa-chart-pie',
+                    category: 'budget',
+                    title: 'Budget limit reminder',
+                    desc: 'Your decoration expenses are getting close to the planned budget.',
+                    time: '5 days ago',
+                    unread: false,
+                    important: true
+                },
+                {
+                    id: 'n13',
+                    icon: 'fa-chair',
+                    category: 'planning',
+                    title: 'Seating arrangement updated',
+                    desc: 'Your guest seating arrangement was updated successfully.',
+                    time: '6 days ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n14',
+                    icon: 'fa-clock',
+                    category: 'planning',
+                    title: 'Wedding timeline updated',
+                    desc: 'Your wedding timeline has been updated with new events.',
+                    time: '1 week ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n15',
+                    icon: 'fa-user',
+                    category: 'system',
+                    title: 'Profile updated',
+                    desc: 'Your wedding profile information was updated successfully.',
+                    time: '1 week ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n16',
+                    icon: 'fa-heart',
+                    category: 'system',
+                    title: 'Welcome to Wedora',
+                    desc: 'Start planning your dream wedding with Wedora.',
+                    time: '1 week ago',
+                    unread: false,
+                    important: false
+                }
+            ];
+
+            /* Extra notifications loaded via "Load More" */
+            const EXTRA_NOTIFICATIONS = [
+                {
+                    id: 'n17',
+                    icon: 'fa-glass-cheers',
+                    category: 'planning',
+                    title: 'Reception plan updated',
+                    desc: 'Your reception timeline was updated with new events.',
+                    time: '1 week ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n18',
+                    icon: 'fa-spa',
+                    category: 'vendor',
+                    title: 'Makeup artist availability',
+                    desc: 'Your preferred makeup artist has updated their availability.',
+                    time: '1 week ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n19',
+                    icon: 'fa-file-invoice-dollar',
+                    category: 'payment',
+                    title: 'Invoice received',
+                    desc: 'A new vendor invoice is available for review.',
+                    time: '2 weeks ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n20',
+                    icon: 'fa-gem',
+                    category: 'budget',
+                    title: 'Jewellery budget added',
+                    desc: 'Your jewellery budget category has been added.',
+                    time: '2 weeks ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n21',
+                    icon: 'fa-palette',
+                    category: 'planning',
+                    title: 'Decoration theme saved',
+                    desc: 'Your decoration theme selections were saved successfully.',
+                    time: '2 weeks ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n22',
+                    icon: 'fa-envelope',
+                    category: 'invitation',
+                    title: 'Invitations sent',
+                    desc: 'Your invitations were successfully sent to your guest list.',
+                    time: '3 weeks ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n23',
+                    icon: 'fa-check-circle',
+                    category: 'checklist',
+                    title: 'Checklist progress saved',
+                    desc: 'Your wedding checklist progress has been saved.',
+                    time: '3 weeks ago',
+                    unread: false,
+                    important: false
+                },
+                {
+                    id: 'n24',
+                    icon: 'fa-bell',
+                    category: 'system',
+                    title: 'Notifications enabled',
+                    desc: 'You have enabled push notifications for Wedora.',
+                    time: '1 month ago',
+                    unread: false,
+                    important: false
+                }
+            ];
+
+            /* ==========================================================
+               STATE
+               ========================================================== */
+            let notifications = [];          // All loaded notifications
+            let loadedExtra = false;         // Whether EXTRA_NOTIFICATIONS have been loaded
+            let currentFilter = 'all';       // All / unread / important / category
+            let searchQuery = '';
+
+            const PAGE_SIZE = 16;
+
+            /* ==========================================================
+               CATEGORY LABELS
+               ========================================================== */
+            const CATEGORY_LABELS = {
+                guest: 'Guest',
+                budget: 'Budget',
+                vendor: 'Vendor',
+                checklist: 'Checklist',
+                payment: 'Payment',
+                invitation: 'Invitation',
+                planning: 'Planning',
+                system: 'System'
+            };
+
+            /* ==========================================================
+               TOAST
+               ========================================================== */
+            let toastTimer;
+            function showToast(message, isError) {
+                const toast = document.getElementById('toast');
+                const toastText = document.getElementById('toastText');
+                const icon = toast.querySelector('i');
+                toastText.textContent = message;
+                icon.className = isError ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+            }
+
+            /* ==========================================================
+               UTILS
+               ========================================================== */
+            function escapeHtml(str) {
+                if (str === null || str === undefined) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            /* ==========================================================
+               FILTERING + SEARCH
+               ========================================================== */
+            function getFilteredNotifications() {
+                let list = notifications.slice();
+
+                // Special filters
+                if (currentFilter === 'unread') {
+                    list = list.filter(n => n.unread);
+                } else if (currentFilter === 'important') {
+                    list = list.filter(n => n.important);
+                } else if (currentFilter === 'all') {
+                    // no filter
+                } else {
+                    // Category filter
+                    list = list.filter(n => n.category === currentFilter);
+                }
+
+                // Search
+                if (searchQuery) {
+                    const q = searchQuery.toLowerCase();
+                    list = list.filter(n =>
+                        n.title.toLowerCase().includes(q) ||
+                        n.desc.toLowerCase().includes(q) ||
+                        (CATEGORY_LABELS[n.category] || '').toLowerCase().includes(q)
+                    );
+                }
+
+                return list;
+            }
+
+            /* ==========================================================
+               SUMMARY CARDS + HEADER COUNT
+               ========================================================== */
+            function updateSummary() {
+                const total = notifications.length;
+                const unread = notifications.filter(n => n.unread).length;
+                const important = notifications.filter(n => n.important).length;
+                const updates = notifications.filter(n =>
+                    ['planning', 'checklist', 'budget', 'guest', 'vendor', 'invitation'].includes(n.category)
+                ).length;
+
+                document.getElementById('sumAll').textContent = total;
+                document.getElementById('sumUnread').textContent = unread;
+                document.getElementById('sumImportant').textContent = important;
+                document.getElementById('sumUpdates').textContent = updates;
+                document.getElementById('headerUnreadCount').textContent = unread;
+            }
+
+            /* ==========================================================
+               RENDER NOTIFICATION LIST
+               ========================================================== */
+            const listEl = document.getElementById('notifList');
+
+            function render() {
+                const filtered = getFilteredNotifications();
+                listEl.innerHTML = '';
+
+                // Update visible count + filter label
+                document.getElementById('visibleCount').textContent = filtered.length;
+                document.getElementById('filterLabelText').textContent = getFilterLabel();
+
+                // Summary cards
+                updateSummary();
+
+                // Empty state
+                if (filtered.length === 0) {
+                    listEl.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon"><i class="fas fa-bell-slash"></i></div>
+              <h3>No notifications found</h3>
+              <p>You're all caught up! New wedding planning updates will appear here.</p>
+            </div>
+          `;
+                    document.getElementById('loadMoreWrap').style.display = 'none';
+                    return;
+                }
+
+                // Render each notification
+                filtered.forEach(n => {
+                    const card = document.createElement('div');
+                    card.className = 'notif-card' + (n.unread ? ' unread' : '') + (n.important ? ' important' : '');
+                    card.setAttribute('data-id', n.id);
+
+                    const catLabel = CATEGORY_LABELS[n.category] || 'General';
+
+                    card.innerHTML = `
+            <div class="notif-icon"><i class="fas ${n.icon}"></i></div>
+            <div class="notif-body">
+              <div class="notif-title-row">
+                <div class="notif-title">${escapeHtml(n.title)}</div>
+                <span class="notif-cat-badge ${n.category}">${catLabel}</span>
+              </div>
+              <div class="notif-desc">${escapeHtml(n.desc)}</div>
+              <div class="notif-meta">
+                <span class="time"><i class="fas fa-clock"></i>${escapeHtml(n.time)}</span>
+                ${n.unread ? '<span class="unread-indicator">Unread</span>' : ''}
+                ${n.important ? '<span style="color:#d98c3f; font-weight:600;">★ Important</span>' : ''}
+              </div>
+            </div>
+            <div class="notif-actions">
+              <button class="notif-view-btn" data-action="view">View</button>
+              <button class="notif-dots" data-action="menu" aria-label="More options">
+                <i class="fas fa-ellipsis-v"></i>
+              </button>
+              <div class="notif-menu" data-menu-id="${n.id}">
+                <button data-menu-action="mark-read"><i class="fas fa-check"></i> Mark as read</button>
+                <button data-menu-action="mark-unread"><i class="fas fa-envelope"></i> Mark as unread</button>
+                <div class="divider"></div>
+                <button data-menu-action="delete" class="danger"><i class="fas fa-trash"></i> Delete</button>
+              </div>
+            </div>
+          `;
+
+                    attachCardEvents(card, n);
+                    listEl.appendChild(card);
+                });
+
+                // Load more visibility
+                const totalAvailable = loadedExtra ? notifications.length : (BASE_NOTIFICATIONS.length + EXTRA_NOTIFICATIONS.length);
+                const totalLoaded = loadedExtra ? notifications.length : BASE_NOTIFICATIONS.length;
+                const loadMoreWrap = document.getElementById('loadMoreWrap');
+                const loadMoreBtn = document.getElementById('loadMoreBtn');
+                const statusEl = document.getElementById('loadMoreStatus');
+
+                if (loadedExtra || notifications.length >= totalAvailable) {
+                    loadMoreBtn.disabled = true;
+                    loadMoreBtn.innerHTML = '<i class="fas fa-check"></i> All notifications loaded';
+                    statusEl.textContent = `Showing all ${totalLoaded} notifications`;
+                    loadMoreWrap.style.display = 'flex';
+                } else {
+                    loadMoreBtn.disabled = false;
+                    loadMoreBtn.innerHTML = '<i class="fas fa-plus-circle"></i> Load More Notifications';
+                    statusEl.textContent = `Showing ${totalLoaded} of ${totalAvailable} notifications`;
+                    loadMoreWrap.style.display = 'flex';
+                }
+            }
+
+            function getFilterLabel() {
+                if (currentFilter === 'all') return '(all)';
+                if (currentFilter === 'unread') return '(unread)';
+                if (currentFilter === 'important') return '(important)';
+                return '(' + (CATEGORY_LABELS[currentFilter] || currentFilter) + ')';
+            }
+
+            /* ==========================================================
+               CARD EVENTS
+               ========================================================== */
+            function attachCardEvents(card, n) {
+                // Click on card → mark as read
+                card.addEventListener('click', function (e) {
+                    if (e.target.closest('.notif-menu') || e.target.closest('.notif-dots') ||
+                        e.target.closest('.notif-view-btn')) {
+                        return;
+                    }
+                    markAsRead(n.id);
+                });
+
+                // View button
+                const viewBtn = card.querySelector('.notif-view-btn');
+                if (viewBtn) {
+                    viewBtn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        markAsRead(n.id);
+                        showToast('Opening notification: ' + n.title);
+                    });
+                }
+
+                // Three-dot menu
+                const dotsBtn = card.querySelector('.notif-dots');
+                const menu = card.querySelector('.notif-menu');
+
+                dotsBtn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    // Close all other menus
+                    document.querySelectorAll('.notif-menu.show').forEach(m => {
+                        if (m !== menu) m.classList.remove('show');
+                    });
+                    menu.classList.toggle('show');
+                });
+
+                // Menu actions
+                menu.querySelectorAll('button').forEach(btn => {
+                    btn.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        const action = this.getAttribute('data-menu-action');
+                        menu.classList.remove('show');
+
+                        if (action === 'mark-read') {
+                            markAsRead(n.id);
+                        } else if (action === 'mark-unread') {
+                            markAsUnread(n.id);
+                        } else if (action === 'delete') {
+                            deleteNotification(n.id);
+                        }
+                    });
+                });
+            }
+
+            /* Close all menus on outside click */
+            document.addEventListener('click', function () {
+                document.querySelectorAll('.notif-menu.show').forEach(m => m.classList.remove('show'));
+            });
+
+            /* ==========================================================
+               NOTIFICATION ACTIONS
+               ========================================================== */
+            function markAsRead(id) {
+                const n = notifications.find(x => x.id === id);
+                if (!n) return;
+                if (!n.unread) return;
+                n.unread = false;
+                render();
+            }
+
+            function markAsUnread(id) {
+                const n = notifications.find(x => x.id === id);
+                if (!n) return;
+                if (n.unread) return;
+                n.unread = true;
+                render();
+                showToast('Marked as unread');
+            }
+
+            function deleteNotification(id) {
+                const n = notifications.find(x => x.id === id);
+                if (!n) return;
+                if (!confirm('Delete this notification?')) return;
+                notifications = notifications.filter(x => x.id !== id);
+                render();
+                showToast('Notification deleted');
+            }
+
+            function markAllAsRead() {
+                const unreadCount = notifications.filter(n => n.unread).length;
+                if (unreadCount === 0) {
+                    showToast('All notifications are already read');
+                    return;
+                }
+                notifications.forEach(n => n.unread = false);
+                render();
+                showToast('All notifications marked as read');
+            }
+
+            function clearRead() {
+                const beforeCount = notifications.length;
+                notifications = notifications.filter(n => n.unread);
+                const removed = beforeCount - notifications.length;
+                if (removed === 0) {
+                    showToast('No read notifications to clear');
+                    return;
+                }
+                render();
+                showToast(removed + ' read notification(s) cleared');
+            }
+
+            function refreshNotifications() {
+                const btn = document.getElementById('refreshBtn');
+                btn.classList.add('spinning');
+
+                // Reset to base notifications
+                setTimeout(() => {
+                    notifications = JSON.parse(JSON.stringify(BASE_NOTIFICATIONS));
+                    loadedExtra = false;
+                    render();
+                    btn.classList.remove('spinning');
+                    showToast('Notifications refreshed');
+                }, 700);
+            }
+
+            function loadMore() {
+                if (loadedExtra) return;
+                const extra = JSON.parse(JSON.stringify(EXTRA_NOTIFICATIONS));
+                notifications = notifications.concat(extra);
+                loadedExtra = true;
+                render();
+                showToast('More notifications loaded');
+            }
+
+            /* ==========================================================
+               SUMMARY CARD CLICKS
+               ========================================================== */
+            document.querySelectorAll('.summary-card').forEach(card => {
+                card.addEventListener('click', function () {
+                    const filter = this.getAttribute('data-summary');
+                    document.querySelectorAll('.summary-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Sync with chip filter
+                    let chipFilter = filter;
+                    if (filter === 'updates') chipFilter = 'planning';
+
+                    // Remove active from chips
+                    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    const chip = document.querySelector(`.filter-chip[data-filter="${chipFilter}"]`);
+                    if (chip) chip.classList.add('active');
+
+                    currentFilter = chipFilter;
+                    render();
+                });
+            });
+
+            /* ==========================================================
+               FILTER CHIPS
+               ========================================================== */
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', function () {
+                    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+
+                    // Sync summary card active state
+                    document.querySelectorAll('.summary-card').forEach(c => c.classList.remove('active'));
+                    const sumKey = currentFilter === 'planning' ? 'updates' : currentFilter;
+                    const sumCard = document.querySelector(`.summary-card[data-summary="${sumKey}"]`);
+                    if (sumCard) sumCard.classList.add('active');
+
+                    render();
+                });
+            });
+
+            /* ==========================================================
+               SEARCH
+               ========================================================== */
+            const searchInput = document.getElementById('searchInput');
+            let searchTimer;
+            searchInput.addEventListener('input', function () {
+                clearTimeout(searchTimer);
+                const val = this.value.trim();
+                searchTimer = setTimeout(() => {
+                    searchQuery = val;
+                    render();
+                }, 180);
+            });
+
+            /* ==========================================================
+               BULK ACTIONS
+               ========================================================== */
+            document.getElementById('markAllBtn').addEventListener('click', markAllAsRead);
+            document.getElementById('clearReadBtn').addEventListener('click', clearRead);
+            document.getElementById('refreshBtn').addEventListener('click', refreshNotifications);
+            document.getElementById('loadMoreBtn').addEventListener('click', loadMore);
+
+            /* ==========================================================
+               HAMBURGER MENU
+               ========================================================== */
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            hamburger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                navMenu.classList.toggle('open');
+                const icon = hamburger.querySelector('i');
+                if (navMenu.classList.contains('open')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function () {
+                    if (window.innerWidth <= 992) {
+                        navMenu.classList.remove('open');
+                        const icon = hamburger.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (window.innerWidth <= 992 && navMenu.classList.contains('open')) {
+                    if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                        navMenu.classList.remove('open');
+                        const icon = hamburger.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+
+            /* ==========================================================
+               INIT
+               ========================================================== */
+            function init() {
+                notifications = JSON.parse(JSON.stringify(BASE_NOTIFICATIONS));
+                loadedExtra = false;
+                render();
+            }
+
+            init();
+
+        })();
+    </script>
+
+</body>
+
+</html>

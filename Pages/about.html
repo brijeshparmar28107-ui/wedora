@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Wedora</title>
+    <!-- Google Fonts + Font Awesome (same as existing Wedora design) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================================
+       GLOBAL RESET & VARIABLES (preserve Wedora look)
+       ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blush: #f8e8e8;
+            --champagne: #f5e6d3;
+            --gold: #c9a87c;
+            --deep-rose: #b76e79;
+            --charcoal: #2e2e2e;
+            --soft-gray: #f9f7f4;
+            --white: #ffffff;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.12);
+            --border-radius: 24px;
+            --border-radius-sm: 16px;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Jost', sans-serif;
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--soft-gray);
+            color: var(--charcoal);
+            line-height: 1.6;
+            font-weight: 400;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ============================================================
+       CONTAINER
+       ============================================================ */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        /* ============================================================
+       NAVBAR
+       ============================================================ */
+        .navbar {
+            padding: 18px 0;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-rose);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-item a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            transition: var(--transition);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-item a:hover {
+            color: var(--deep-rose);
+        }
+
+        .nav-item.active a {
+            color: var(--deep-rose);
+            font-weight: 600;
+        }
+
+        .nav-item.active a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--deep-rose);
+            border-radius: 2px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1.5px solid transparent;
+            font-family: var(--font-sans);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--deep-rose);
+            color: white;
+            border-color: var(--deep-rose);
+        }
+
+        .btn-primary:hover {
+            background: #a05a64;
+            border-color: #a05a64;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--charcoal);
+            border: 1.5px solid var(--charcoal);
+        }
+
+        .btn-outline:hover {
+            background: var(--charcoal);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+
+        .btn-gold:hover {
+            background: #b8935f;
+            border-color: #b8935f;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--charcoal);
+            cursor: pointer;
+            padding: 0 8px;
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 78px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 28px 20px 36px;
+                gap: 20px;
+                box-shadow: var(--shadow-lg);
+                transform: translateY(-120%);
+                transition: transform 0.35s ease;
+                opacity: 0;
+                pointer-events: none;
+                border-radius: 0 0 32px 32px;
+                z-index: 999;
+            }
+
+            .nav-menu.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-item a {
+                font-size: 1.15rem;
+                padding: 8px 0;
+            }
+        }
+
+        /* ============================================================
+       HERO SECTION
+       ============================================================ */
+        .about-hero {
+            background: linear-gradient(135deg, var(--blush) 0%, var(--champagne) 100%);
+            padding: 64px 0 80px;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(201, 168, 124, 0.22) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -60px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(183, 110, 121, 0.14) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--deep-rose);
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .hero-badge i {
+            color: var(--gold);
+        }
+
+        .hero-text h1 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1.15;
+            color: var(--charcoal);
+            margin-bottom: 18px;
+        }
+
+        .hero-text h1 span {
+            color: var(--deep-rose);
+            font-style: italic;
+        }
+
+        .hero-text p {
+            font-size: 1.08rem;
+            color: #5e5e5e;
+            font-weight: 300;
+            max-width: 90%;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border: 5px solid white;
+        }
+
+        .hero-float-card {
+            position: absolute;
+            bottom: 20px;
+            left: -20px;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 16px 22px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: floatBadge 3.5s ease-in-out infinite;
+        }
+
+        @keyframes floatBadge {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .hero-float-card .fc-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--blush);
+            color: var(--deep-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+        }
+
+        .hero-float-card .fc-text .num {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            line-height: 1.1;
+        }
+
+        .hero-float-card .fc-text .lbl {
+            font-size: 0.75rem;
+            color: #8a8a8a;
+            font-weight: 400;
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero-text p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image img {
+                height: 300px;
+            }
+
+            .hero-float-card {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: -16px;
+            }
+        }
+
+        /* ============================================================
+       SECTION BASE
+       ============================================================ */
+        .section {
+            padding: 72px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: #6b6b6b;
+            font-size: 1.05rem;
+            font-weight: 300;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--deep-rose);
+            margin-bottom: 12px;
+        }
+
+        /* ============================================================
+       OUR STORY
+       ============================================================ */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .story-text p {
+            font-size: 1rem;
+            color: #5e5e5e;
+            font-weight: 300;
+            margin-bottom: 16px;
+            line-height: 1.75;
+        }
+
+        .story-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .story-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: var(--white);
+            border: 1px solid rgba(201, 168, 124, 0.3);
+            font-size: 0.82rem;
+            color: var(--charcoal);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .story-chip:hover {
+            border-color: var(--deep-rose);
+            color: var(--deep-rose);
+            transform: translateY(-2px);
+        }
+
+        .story-chip i {
+            color: var(--gold);
+            font-size: 0.8rem;
+        }
+
+        .story-image {
+            position: relative;
+        }
+
+        .story-image img {
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 992px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-image img {
+                height: 280px;
+            }
+        }
+
+        /* ============================================================
+       WHY WEDORA
+       ============================================================ */
+        .why-section {
+            background: var(--white);
+            border-radius: 40px;
+            padding: 72px 0;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        @media (max-width: 992px) {
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 560px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .why-card {
+            background: var(--soft-gray);
+            border-radius: var(--border-radius-sm);
+            padding: 30px 26px;
+            transition: var(--transition);
+            border: 1px solid rgba(201, 168, 124, 0.1);
+            text-align: center;
+        }
+
+        .why-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold);
+            background: var(--white);
+        }
+
+        .why-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: var(--blush);
+            color: var(--deep-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin: 0 auto 18px;
+            transition: var(--transition);
+        }
+
+        .why-card:hover .why-icon {
+            background: var(--deep-rose);
+            color: white;
+            transform: scale(1.08);
+        }
+
+        .why-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            font-size: 0.88rem;
+            color: #7a7a7a;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+       MISSION
+       ============================================================ */
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .mission-image {
+            position: relative;
+        }
+
+        .mission-image img {
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .mission-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--border-radius);
+            background: linear-gradient(135deg, rgba(201, 168, 124, 0.15), transparent 60%);
+            pointer-events: none;
+        }
+
+        .mission-text h2 {
+            font-family: var(--font-serif);
+            font-size: 2.3rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .mission-text p {
+            font-size: 1rem;
+            color: #5e5e5e;
+            font-weight: 300;
+            margin-bottom: 18px;
+            line-height: 1.75;
+        }
+
+        .mission-points {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .mission-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .mission-point i {
+            color: var(--deep-rose);
+            font-size: 1.05rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .mission-point span {
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 992px) {
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mission-image {
+                order: -1;
+            }
+
+            .mission-image img {
+                height: 280px;
+            }
+
+            .mission-text h2 {
+                font-size: 1.9rem;
+            }
+        }
+
+        /* ============================================================
+       JOURNEY TIMELINE
+       ============================================================ */
+        .journey-section {
+            background: var(--white);
+            border-radius: 40px;
+            padding: 72px 0;
+        }
+
+        .journey-timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 30px 0 10px;
+            margin-top: 10px;
+        }
+
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            top: 52px;
+            left: 6%;
+            right: 6%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--deep-rose), var(--gold));
+            border-radius: 3px;
+            z-index: 0;
+        }
+
+        .journey-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            min-width: 0;
+            padding: 0 6px;
+        }
+
+        .journey-dot {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .journey-step:hover .journey-dot {
+            background: var(--deep-rose);
+            border-color: var(--deep-rose);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .journey-step h4 {
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 4px;
+        }
+
+        .journey-step p {
+            font-size: 0.78rem;
+            color: #8a8a8a;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 992px) {
+            .journey-timeline {
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+
+            .journey-timeline::before {
+                display: none;
+            }
+
+            .journey-step {
+                flex: 0 0 45%;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .journey-step {
+                flex: 0 0 100%;
+            }
+        }
+
+        /* ============================================================
+       STATISTICS
+       ============================================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        @media (max-width: 992px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--border-radius-sm);
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(201, 168, 124, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--deep-rose));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold);
+        }
+
+        .stat-card .stat-icon {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            background: var(--blush);
+            color: var(--deep-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin: 0 auto 16px;
+        }
+
+        .stat-card .stat-num {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--deep-rose);
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.88rem;
+            color: #6b6b6b;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        /* ============================================================
+       WEDDING MOMENTS SHOWCASE (NEW SECTION)
+       ============================================================ */
+        .moments-section {
+            background: var(--white);
+            border-radius: 40px;
+            padding: 72px 0;
+            margin: 72px 0 0;
+        }
+
+        .moments-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .moments-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+        }
+
+        .moment-card {
+            background: var(--soft-gray);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(201, 168, 124, 0.12);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .moment-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--gold);
+        }
+
+        .moment-image {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            background: var(--blush);
+        }
+
+        .moment-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 25%;
+            transition: transform 0.6s ease;
+        }
+
+        .moment-card:hover .moment-image img {
+            transform: scale(1.07);
+        }
+
+        /* Elegant overlay */
+        .moment-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0) 45%,
+                    rgba(46, 46, 46, 0.75) 100%);
+            opacity: 0.9;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .moment-card:hover .moment-overlay {
+            opacity: 1;
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.05) 0%,
+                    rgba(0, 0, 0, 0.15) 45%,
+                    rgba(183, 110, 121, 0.85) 100%);
+        }
+
+        /* Zoom icon on hover */
+        .moment-zoom {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--deep-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: all 0.35s ease;
+            box-shadow: var(--shadow-md);
+            z-index: 2;
+        }
+
+        .moment-card:hover .moment-zoom {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Text overlay at bottom of image */
+        .moment-caption {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 26px 26px 22px;
+            z-index: 1;
+            color: white;
+            text-align: left;
+        }
+
+        .moment-caption h4 {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 6px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+        }
+
+        .moment-caption p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.92);
+            font-weight: 300;
+            line-height: 1.5;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+        }
+
+        @media (max-width: 640px) {
+            .moments-section {
+                padding: 56px 0;
+            }
+
+            .moment-image {
+                height: 260px;
+            }
+
+            .moment-caption {
+                padding: 20px 20px 18px;
+            }
+
+            .moment-caption h4 {
+                font-size: 1.35rem;
+            }
+
+            .moment-caption p {
+                font-size: 0.82rem;
+            }
+        }
+
+        /* ============================================================
+       LIGHTBOX
+       ============================================================ */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .lightbox.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            max-width: 1100px;
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transform: scale(0.94);
+            transition: transform 0.4s ease;
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 100px);
+        }
+
+        .lightbox.show .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-image-wrap {
+            width: 100%;
+            height: 65vh;
+            min-height: 260px;
+            background: var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-caption {
+            padding: 22px 30px;
+            background: var(--white);
+            border-top: 1px solid #f0ebe5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .lightbox-caption-text h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 4px;
+        }
+
+        .lightbox-caption-text p {
+            font-size: 0.9rem;
+            color: #7a7a7a;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .lightbox-counter {
+            font-size: 0.85rem;
+            color: var(--deep-rose);
+            font-weight: 600;
+            background: var(--blush);
+            padding: 6px 14px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        /* Lightbox controls */
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            transition: var(--transition);
+            z-index: 3002;
+            box-shadow: var(--shadow-md);
+        }
+
+        .lightbox-close:hover {
+            background: var(--deep-rose);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.15rem;
+            color: var(--charcoal);
+            transition: var(--transition);
+            z-index: 3001;
+            box-shadow: var(--shadow-md);
+        }
+
+        .lightbox-nav:hover {
+            background: var(--deep-rose);
+            color: white;
+        }
+
+        .lightbox-nav.prev {
+            left: 20px;
+        }
+
+        .lightbox-nav.next {
+            right: 20px;
+        }
+
+        @media (max-width: 640px) {
+            .lightbox {
+                padding: 60px 12px 12px;
+            }
+
+            .lightbox-image-wrap {
+                height: 55vh;
+                min-height: 220px;
+            }
+
+            .lightbox-caption {
+                padding: 16px 20px;
+            }
+
+            .lightbox-caption-text h3 {
+                font-size: 1.2rem;
+            }
+
+            .lightbox-caption-text p {
+                font-size: 0.82rem;
+            }
+
+            .lightbox-nav {
+                width: 42px;
+                height: 42px;
+                font-size: 1rem;
+            }
+
+            .lightbox-nav.prev {
+                left: 10px;
+            }
+
+            .lightbox-nav.next {
+                right: 10px;
+            }
+
+            .lightbox-close {
+                top: 12px;
+                right: 12px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* ============================================================
+       FINAL CTA
+       ============================================================ */
+        .final-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--champagne) 0%, var(--blush) 100%);
+            border-radius: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: 72px 0;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 10%;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(201, 168, 124, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .final-cta::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: 10%;
+            width: 220px;
+            height: 220px;
+            background: radial-gradient(circle, rgba(183, 110, 121, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .final-cta .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-icon {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 22px;
+            font-size: 1.9rem;
+            color: var(--deep-rose);
+            box-shadow: var(--shadow-md);
+        }
+
+        .final-cta h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 14px;
+        }
+
+        .final-cta p {
+            color: #5e5e5e;
+            font-weight: 300;
+            font-size: 1.05rem;
+            max-width: 560px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 640px) {
+            .final-cta h2 {
+                font-size: 1.9rem;
+            }
+        }
+
+        /* ============================================================
+       FOOTER — MASTER FOOTER FROM index.html
+       ============================================================ */
+        .footer {
+            background: var(--charcoal);
+            color: #dadada;
+            padding: 64px 0 28px;
+            border-radius: 40px 40px 0 0;
+            margin-top: 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            color: #b0b0b0;
+            font-weight: 300;
+            max-width: 280px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #b0b0b0;
+            font-weight: 300;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #3f3f3f;
+            padding-top: 24px;
+            text-align: center;
+            color: #8a8a8a;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        /* ============================================================
+       SCROLL REVEAL
+       ============================================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal {
+                transition: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+       NAVBAR — SINGLE MASTER HEADER (Home | Features | Vendors | About | Contact)
+       This file lives in Pages/ so all links use ../ for root/services
+       ============================================================ -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Wedora<span>.</span></a>
+
+            <nav class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="../index.html">Home</a></li>
+                <li class="nav-item"><a href="features.html">Features</a></li>
+                <li class="nav-item"><a href="../services/vendors.html">Vendors</a></li>
+                <li class="nav-item active"><a href="about.html">About</a></li>
+                <li class="nav-item"><a href="contact.html">Contact</a></li>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="../login.html" class="btn btn-outline">Login</a>
+                <a href="../register.html" class="btn btn-primary">Get Started</a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================================================
+       HERO SECTION — Hero photo replaced with premium Indian wedding image
+       "One Place / For Your Whole Wedding" heading unchanged
+       ============================================================ -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <div class="hero-badge"><i class="fas fa-heart"></i> About Wedora</div>
+                    <h1>Making Wedding Planning <span>Simple, Beautiful</span> &amp; Stress-Free</h1>
+                    <p>Wedora helps couples organize and manage every part of their wedding planning — from budget and
+                        guests to vendors, catering and invitations — all in one place.</p>
+                    <div class="hero-buttons">
+                        <a href="../register.html" class="btn btn-primary"><i class="fas fa-heart"></i> Start
+                            Planning</a>
+                        <a href="features.html" class="btn btn-outline"><i class="fas fa-star"></i> Explore Features</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <!-- NEW HERO IMAGE — premium Indian wedding celebration -->
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1740&auto=format&fit=crop"
+                        alt="Indian wedding celebration">
+                    <div class="hero-float-card">
+                        <div class="fc-icon"><i class="fas fa-heart"></i></div>
+                        <div class="fc-text">
+                            <div class="num">One Place</div>
+                            <div class="lbl">For Your Whole Wedding</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       OUR STORY
+       ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-text reveal">
+                    <span class="section-label">Our Story</span>
+                    <h2
+                        style="font-family:var(--font-serif); font-size:2.2rem; font-weight:600; color:var(--charcoal); margin-bottom:18px; line-height:1.2;">
+                        Built for Couples, Designed for Joy
+                    </h2>
+                    <p>Wedora was created to make wedding planning easier. We saw how quickly the process could become
+                        overwhelming — with lists in one app, budgets in another, and vendor conversations scattered
+                        everywhere.</p>
+                    <p>So we brought the important planning activities into one organized platform, where couples can
+                        plan with clarity and enjoy the journey.</p>
+                    <div class="story-features">
+                        <span class="story-chip"><i class="fas fa-coins"></i> Budget Planning</span>
+                        <span class="story-chip"><i class="fas fa-users"></i> Guest Management</span>
+                        <span class="story-chip"><i class="fas fa-store"></i> Vendor Management</span>
+                        <span class="story-chip"><i class="fas fa-list-check"></i> Wedding Checklist</span>
+                        <span class="story-chip"><i class="fas fa-utensils"></i> Catering &amp; Menu</span>
+                        <span class="story-chip"><i class="fas fa-envelope-open-text"></i> Invitations</span>
+                        <span class="story-chip"><i class="fas fa-chair"></i> Seating Arrangement</span>
+                        <span class="story-chip"><i class="fas fa-clock"></i> Wedding Timeline</span>
+                    </div>
+                </div>
+                <div class="story-image reveal">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=1740&auto=format&fit=crop"
+                        alt="Wedding planning">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       WHY WEDORA
+       ============================================================ -->
+    <section class="section why-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Why Wedora</span>
+                <h2>Everything You Need to Plan With Confidence</h2>
+                <p>Thoughtful tools that keep your wedding planning calm, organized and enjoyable.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-layer-group"></i></div>
+                    <h3>Everything in One Place</h3>
+                    <p>Budget, guests, vendors, checklist and more — all together in a single dashboard.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-hand-pointer"></i></div>
+                    <h3>Easy to Use</h3>
+                    <p>A clean, friendly interface designed for couples — no learning curve required.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Smart Planning</h3>
+                    <p>Helpful insights and progress tracking keep you moving toward your big day.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-folder-open"></i></div>
+                    <h3>Better Organization</h3>
+                    <p>Keep every detail structured so nothing important slips through the cracks.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Save Time</h3>
+                    <p>Reduce back-and-forth and spend more time enjoying the moments that matter.</p>
+                </div>
+                <div class="why-card reveal">
+                    <div class="why-icon"><i class="fas fa-spa"></i></div>
+                    <h3>Stress-Free Experience</h3>
+                    <p>Plan with a clear mind and a calm heart — the way your wedding should feel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       MISSION
+       ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="mission-grid">
+                <div class="mission-image reveal">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1740&auto=format&fit=crop"
+                        alt="Wedding moments">
+                </div>
+                <div class="mission-text reveal">
+                    <span class="section-label">Our Mission</span>
+                    <h2>Helping Couples Plan With Less Stress</h2>
+                    <p>Our mission is simple — to help couples plan their dream wedding with less stress, better
+                        organization, and a simple digital experience.</p>
+                    <p>We believe planning should feel joyful, not overwhelming. Every feature in Wedora is designed to
+                        bring clarity, save time, and keep what matters most at the centre of the journey.</p>
+                    <div class="mission-points">
+                        <div class="mission-point">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Less stress through clear, organized planning tools</span>
+                        </div>
+                        <div class="mission-point">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Better organization so nothing important is missed</span>
+                        </div>
+                        <div class="mission-point">
+                            <i class="fas fa-check-circle"></i>
+                            <span>A simple, elegant digital experience for every couple</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       WEDDING PLANNING JOURNEY
+       ============================================================ -->
+    <section class="section journey-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Your Journey</span>
+                <h2>The Wedding Planning Journey</h2>
+                <p>From the first plan to the final celebration — Wedora walks with you at every step.</p>
+            </div>
+            <div class="journey-timeline">
+                <div class="journey-step reveal">
+                    <div class="journey-dot"><i class="fas fa-pencil-ruler"></i></div>
+                    <h4>Plan</h4>
+                    <p>Set your vision and themes</p>
+                </div>
+                <div class="journey-step reveal">
+                    <div class="journey-dot"><i class="fas fa-coins"></i></div>
+                    <h4>Set Budget</h4>
+                    <p>Track and manage expenses</p>
+                </div>
+                <div class="journey-step reveal">
+                    <div class="journey-dot"><i class="fas fa-store"></i></div>
+                    <h4>Choose Vendors</h4>
+                    <p>Compare and book services</p>
+                </div>
+                <div class="journey-step reveal">
+                    <div class="journey-dot"><i class="fas fa-users"></i></div>
+                    <h4>Manage Guests</h4>
+                    <p>Organize RSVPs and seating</p>
+                </div>
+                <div class="journey-step reveal">
+                    <div class="journey-dot"><i class="fas fa-utensils"></i></div>
+                    <h4>Plan Catering</h4>
+                    <p>Curate menus and tastings</p>
+                </div>
+                <div class="journey-step reveal">
+                    <div class="journey-dot"><i class="fas fa-clipboard-check"></i></div>
+                    <h4>Finalize Wedding</h4>
+                    <p>Confirm every last detail</p>
+                </div>
+                <div class="journey-step reveal">
+                    <div class="journey-dot"><i class="fas fa-glass-cheers"></i></div>
+                    <h4>Celebrate</h4>
+                    <p>Enjoy your perfect day</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       STATISTICS
+       ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">By the Numbers</span>
+                <h2>Wedora at a Glance</h2>
+                <p>Designed to give you a rich, complete planning experience.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <div class="stat-icon"><i class="fas fa-toolbox"></i></div>
+                    <div class="stat-num">100+</div>
+                    <div class="stat-label">Planning Tools</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-icon"><i class="fas fa-concierge-bell"></i></div>
+                    <div class="stat-num">50+</div>
+                    <div class="stat-label">Wedding Services</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-icon"><i class="fas fa-list-check"></i></div>
+                    <div class="stat-num">10K+</div>
+                    <div class="stat-label">Planning Tasks</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                    <div class="stat-num">100%</div>
+                    <div class="stat-label">Focus on Your Big Day</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       WEDDING MOMENTS SHOWCASE (NEW SECTION — 8 CATEGORIES)
+       ============================================================ -->
+    <section class="moments-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-label">Inspiration</span>
+                <h2>Wedding Moments We Inspire</h2>
+                <p>From the first celebration to the final memories, discover beautiful moments that make every wedding
+                    special.</p>
+            </div>
+
+            <div class="moments-grid" id="momentsGrid">
+                <!-- Rendered by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="cta-icon"><i class="fas fa-heart"></i></div>
+            <h2>Ready to Plan Your Dream Wedding?</h2>
+            <p>Bring your wedding plans together and make every moment easier to manage with Wedora.</p>
+            <div class="cta-buttons">
+                <a href="../register.html" class="btn btn-primary"><i class="fas fa-heart"></i> Start Planning</a>
+                <a href="../index.html" class="btn btn-outline"><i class="fas fa-home"></i> Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       FOOTER — MASTER FOOTER FROM index.html
+       ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">Wedora<span>.</span></a>
+                    <p>Plan your dream wedding with ease. Everything you need, beautifully organized.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="features.html">Features</a></li>
+                        <li><a href="../services/vendors.html">Vendors</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../services/budget.html">Budget Planning</a></li>
+                        <li><a href="../services/guests.html">Guest Management</a></li>
+                        <li><a href="../services/vendors.html">Vendor Management</a></li>
+                        <li><a href="../services/checklist.html">Wedding Checklist</a></li>
+                        <li><a href="../services/catering.html">Catering</a></li>
+                        <li><a href="../services/invitations.html">Invitations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="../login.html">Login</a></li>
+                        <li><a href="../register.html">Register</a></li>
+                        <li><a href="../dashboard.html">Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Wedora. All rights reserved. Designed with love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+       LIGHTBOX
+       ============================================================ -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close preview">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous photo">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-nav next" id="lightboxNext" aria-label="Next photo">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="lightbox-content">
+            <div class="lightbox-image-wrap">
+                <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            </div>
+            <div class="lightbox-caption">
+                <div class="lightbox-caption-text">
+                    <h3 id="lightboxTitle"></h3>
+                    <p id="lightboxDesc"></p>
+                </div>
+                <div class="lightbox-counter" id="lightboxCounter"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+    <script>
+        (function () {
+            'use strict';
+
+            /* ==========================================================
+               WEDDING MOMENTS DATA — 8 categories
+               All images are free-to-use Unsplash photos.
+               ========================================================== */
+            const MOMENTS = [
+                {
+                    title: 'Ring Ceremony',
+                    desc: 'Celebrate the beautiful beginning of a new journey together.',
+                    image: 'ring1.webp'
+                },
+                {
+                    title: 'Haldi',
+                    desc: 'Bright colors, joyful smiles and unforgettable family moments.',
+                    image: 'haldi.jpg'
+                },
+                {
+                    title: 'Mehendi',
+                    desc: 'Beautiful designs, happy moments and the perfect pre-wedding celebration.',
+                    image: 'mahendi.jpg'
+                },
+                {
+                    title: 'Wedding Ceremony',
+                    desc: 'A beautiful celebration filled with traditions, love and unforgettable memories.',
+                    image: 'wedding.jpg'
+                },
+                {
+                    title: 'Reception',
+                    desc: 'Celebrate love with family, friends, music and unforgettable moments.',
+                    image: 'image.jpg'
+                },
+                {
+                    title: 'Bride & Groom',
+                    desc: 'Beautiful portraits capturing the happiness of the couple\'s special day.',
+                    image: 'wedding1.jpg'
+                },
+                {
+                    title: 'Couple Moments',
+                    desc: 'Romantic and candid moments that tell the story of two people in love.',
+                    image: 'wedding2.jpg'
+                },
+                {
+                    title: 'Celebrity Wedding Inspiration',
+                    desc: 'Get inspired by elegant wedding styles, fashion, decoration and celebration ideas.',
+                    image: 'wedding4.jpg'
+                }
+            ];
+
+            /* ==========================================================
+               RENDER MOMENTS GRID
+               ========================================================== */
+            const momentsGrid = document.getElementById('momentsGrid');
+
+            function renderMoments() {
+                momentsGrid.innerHTML = '';
+
+                MOMENTS.forEach((m, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'moment-card reveal';
+                    card.setAttribute('data-idx', idx);
+                    card.setAttribute('role', 'button');
+                    card.setAttribute('tabindex', '0');
+                    card.setAttribute('aria-label', 'View ' + m.title);
+                    card.innerHTML = `
+            <div class="moment-image">
+              <img src="${m.image}" alt="${m.title}" loading="lazy">
+              <div class="moment-overlay"></div>
+              <div class="moment-zoom"><i class="fas fa-expand"></i></div>
+              <div class="moment-caption">
+                <h4>${m.title}</h4>
+                <p>${m.desc}</p>
+              </div>
+            </div>
+          `;
+                    card.addEventListener('click', () => openLightbox(idx));
+                    card.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            openLightbox(idx);
+                        }
+                    });
+                    momentsGrid.appendChild(card);
+                });
+
+                // Observe new reveal elements
+                if (observer) {
+                    momentsGrid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+                } else {
+                    momentsGrid.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+                }
+            }
+
+            /* ==========================================================
+               LIGHTBOX
+               ========================================================== */
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const lightboxDesc = document.getElementById('lightboxDesc');
+            const lightboxCounter = document.getElementById('lightboxCounter');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+
+            let currentIdx = 0;
+
+            function openLightbox(idx) {
+                if (idx < 0 || idx >= MOMENTS.length) return;
+                currentIdx = idx;
+                updateLightbox();
+                lightbox.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+
+            function updateLightbox() {
+                const m = MOMENTS[currentIdx];
+                lightboxImage.src = m.image;
+                lightboxImage.alt = m.title;
+                lightboxTitle.textContent = m.title;
+                lightboxDesc.textContent = m.desc;
+                lightboxCounter.textContent = (currentIdx + 1) + ' / ' + MOMENTS.length;
+            }
+
+            function nextPhoto() {
+                currentIdx = (currentIdx + 1) % MOMENTS.length;
+                updateLightbox();
+            }
+
+            function prevPhoto() {
+                currentIdx = (currentIdx - 1 + MOMENTS.length) % MOMENTS.length;
+                updateLightbox();
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightboxNext.addEventListener('click', function (e) {
+                e.stopPropagation();
+                nextPhoto();
+            });
+            lightboxPrev.addEventListener('click', function (e) {
+                e.stopPropagation();
+                prevPhoto();
+            });
+
+            // Close when clicking outside the content
+            lightbox.addEventListener('click', function (e) {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            // Keyboard support
+            document.addEventListener('keydown', function (e) {
+                if (!lightbox.classList.contains('show')) return;
+                if (e.key === 'Escape') closeLightbox();
+                else if (e.key === 'ArrowRight') nextPhoto();
+                else if (e.key === 'ArrowLeft') prevPhoto();
+            });
+
+            /* ==========================================================
+               HAMBURGER MENU
+               ========================================================== */
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            hamburger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                navMenu.classList.toggle('open');
+                const icon = hamburger.querySelector('i');
+                if (navMenu.classList.contains('open')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function () {
+                    if (window.innerWidth <= 992) {
+                        navMenu.classList.remove('open');
+                        const icon = hamburger.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (window.innerWidth <= 992 && navMenu.classList.contains('open')) {
+                    if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                        navMenu.classList.remove('open');
+                        const icon = hamburger.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+
+            /* ==========================================================
+               SCROLL REVEAL
+               ========================================================== */
+            const revealEls = document.querySelectorAll('.reveal');
+            let observer = null;
+
+            if ('IntersectionObserver' in window) {
+                observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.12,
+                    rootMargin: '0px 0px -40px 0px'
+                });
+
+                revealEls.forEach(el => observer.observe(el));
+            } else {
+                revealEls.forEach(el => el.classList.add('visible'));
+            }
+
+            /* ==========================================================
+               INIT
+               ========================================================== */
+            renderMoments();
+
+        })();
+    </script>
+
+</body>
+
+</html>

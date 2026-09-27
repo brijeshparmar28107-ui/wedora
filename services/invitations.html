@@ -1,0 +1,2489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitations — Wedora</title>
+    <!-- Google Fonts + Font Awesome (same as existing Wedora design) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&family=Dancing+Script:wght@500;700&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================================
+       GLOBAL RESET & VARIABLES (preserve Wedora look)
+       ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blush: #f8e8e8;
+            --champagne: #f5e6d3;
+            --gold: #c9a87c;
+            --deep-rose: #b76e79;
+            --charcoal: #2e2e2e;
+            --soft-gray: #f9f7f4;
+            --white: #ffffff;
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 30px 60px rgba(0, 0, 0, 0.12);
+            --border-radius: 24px;
+            --border-radius-sm: 16px;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Jost', sans-serif;
+            --font-script: 'Great Vibes', cursive;
+            --font-dancing: 'Dancing Script', cursive;
+            --transition: all 0.25s ease;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--soft-gray);
+            color: var(--charcoal);
+            line-height: 1.6;
+            font-weight: 400;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ============================================================
+       NAVBAR — MASTER HEADER
+       ============================================================ */
+        .navbar {
+            padding: 18px 0;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-rose);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--gold);
+            font-weight: 400;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-item a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            transition: var(--transition);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-item a:hover {
+            color: var(--deep-rose);
+        }
+
+        .nav-item.active a {
+            color: var(--deep-rose);
+            font-weight: 600;
+        }
+
+        .nav-item.active a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--deep-rose);
+            border-radius: 2px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1.5px solid transparent;
+            font-family: var(--font-sans);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--deep-rose);
+            color: white;
+            border-color: var(--deep-rose);
+        }
+
+        .btn-primary:hover {
+            background: #a05a64;
+            border-color: #a05a64;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--charcoal);
+            border: 1.5px solid var(--charcoal);
+        }
+
+        .btn-outline:hover {
+            background: var(--charcoal);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+
+        .btn-gold:hover {
+            background: #b8935f;
+            border-color: #b8935f;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-sm {
+            padding: 8px 18px;
+            font-size: 0.85rem;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--charcoal);
+            cursor: pointer;
+            padding: 0 8px;
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 78px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 28px 20px 36px;
+                gap: 20px;
+                box-shadow: var(--shadow-lg);
+                transform: translateY(-120%);
+                transition: transform 0.35s ease;
+                opacity: 0;
+                pointer-events: none;
+                border-radius: 0 0 32px 32px;
+                z-index: 999;
+            }
+
+            .nav-menu.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .nav-item a {
+                font-size: 1.15rem;
+                padding: 8px 0;
+            }
+        }
+
+        /* ============================================================
+       HERO SECTION
+       ============================================================ */
+        .invitations-hero {
+            background: linear-gradient(135deg, var(--blush) 0%, var(--champagne) 100%);
+            padding: 64px 0 72px;
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invitations-hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201, 168, 124, 0.22) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .invitations-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -60px;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(183, 110, 121, 0.14) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .invitations-hero .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 600;
+            line-height: 1.15;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+
+        .hero-text h1 span {
+            color: var(--deep-rose);
+            font-style: italic;
+        }
+
+        .hero-text p {
+            font-size: 1.08rem;
+            color: #5e5e5e;
+            font-weight: 300;
+            max-width: 90%;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* Hero invitation preview */
+        .hero-invite {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 36px 32px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(201, 168, 124, 0.2);
+            text-align: center;
+            position: relative;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-invite::before,
+        .hero-invite::after {
+            content: '❦';
+            position: absolute;
+            color: var(--gold);
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        .hero-invite::before {
+            top: 14px;
+            left: 18px;
+        }
+
+        .hero-invite::after {
+            bottom: 14px;
+            right: 18px;
+        }
+
+        .hero-invite .invite-script {
+            font-family: var(--font-script);
+            font-size: 2.6rem;
+            color: var(--deep-rose);
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .hero-invite .invite-together {
+            font-size: 0.82rem;
+            color: #8a8a8a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+            font-weight: 500;
+        }
+
+        .hero-invite .invite-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 14px auto;
+            position: relative;
+        }
+
+        .hero-invite .invite-divider::after {
+            content: '♦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--white);
+            color: var(--gold);
+            padding: 0 8px;
+            font-size: 0.6rem;
+        }
+
+        .hero-invite .invite-date {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            letter-spacing: 1px;
+        }
+
+        .hero-invite .invite-time {
+            font-size: 0.85rem;
+            color: #6b6b6b;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        .hero-invite .invite-venue {
+            font-size: 0.85rem;
+            color: #8a8a8a;
+            margin-top: 12px;
+            font-weight: 300;
+        }
+
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero-text p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-invite .invite-script {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* ============================================================
+       SECTION HEADERS
+       ============================================================ */
+        .section-header {
+            text-align: center;
+            margin-bottom: 44px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #6b6b6b;
+            font-size: 1.05rem;
+            font-weight: 300;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ============================================================
+       MAIN WRAPPER
+       ============================================================ */
+        .invitations-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px 60px;
+        }
+
+        /* ============================================================
+       TEMPLATES SECTION
+       ============================================================ */
+        .templates-section {
+            margin-bottom: 56px;
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        @media (max-width: 1200px) {
+            .templates-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .templates-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .template-card {
+            background: var(--white);
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid rgba(201, 168, 124, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .template-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold);
+        }
+
+        .template-card.active {
+            border-color: var(--deep-rose);
+            box-shadow: 0 0 0 2px rgba(183, 110, 121, 0.2), var(--shadow-md);
+        }
+
+        .template-preview {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .template-preview .tp-inner {
+            text-align: center;
+            width: 100%;
+        }
+
+        .template-preview .tp-names {
+            font-family: var(--font-script);
+            font-size: 1.6rem;
+            color: var(--deep-rose);
+            line-height: 1.1;
+        }
+
+        .template-preview .tp-sub {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8a8a8a;
+            margin-top: 4px;
+        }
+
+        .template-preview .tp-date {
+            font-family: var(--font-serif);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* Template themes */
+        .theme-traditional {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe0cc 100%);
+        }
+
+        .theme-elegant {
+            background: linear-gradient(135deg, #f8e8e8 0%, #f5e6d3 100%);
+        }
+
+        .theme-floral {
+            background: linear-gradient(135deg, #e8f5e9 0%, #fce4ec 100%);
+        }
+
+        .theme-royal {
+            background: linear-gradient(135deg, #ede7f6 0%, #e1bee7 100%);
+        }
+
+        .theme-minimal {
+            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+        }
+
+        .theme-modern {
+            background: linear-gradient(135deg, #e0f7fa 0%, #e8eaf6 100%);
+        }
+
+        .theme-gujarati {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+        }
+
+        .theme-hindu {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        }
+
+        .template-info {
+            padding: 18px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .template-info h4 {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 4px;
+        }
+
+        .template-info p {
+            font-size: 0.82rem;
+            color: #8a8a8a;
+            font-weight: 300;
+            margin-bottom: 14px;
+            flex: 1;
+        }
+
+        .template-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .template-actions button {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 30px;
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1.5px solid transparent;
+        }
+
+        .tpl-use {
+            background: var(--deep-rose);
+            color: white;
+            border-color: var(--deep-rose);
+        }
+
+        .tpl-use:hover {
+            background: #a05a64;
+            transform: translateY(-2px);
+        }
+
+        .tpl-preview-btn {
+            background: transparent;
+            color: var(--charcoal);
+            border-color: #e8e4df;
+        }
+
+        .tpl-preview-btn:hover {
+            border-color: var(--gold);
+            color: var(--deep-rose);
+        }
+
+        /* ============================================================
+       BUILDER SECTION
+       ============================================================ */
+        .builder-section {
+            margin-bottom: 56px;
+        }
+
+        .builder-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        @media (max-width: 992px) {
+            .builder-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .builder-form-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 32px 32px 28px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(201, 168, 124, 0.1);
+        }
+
+        .builder-form-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+
+        .builder-form-card .subtitle {
+            color: #8a8a8a;
+            font-size: 0.88rem;
+            margin-bottom: 22px;
+            font-weight: 300;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+            letter-spacing: 0.2px;
+        }
+
+        .form-group label .req {
+            color: var(--deep-rose);
+            margin-left: 2px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e8e4df;
+            border-radius: 12px;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            color: var(--charcoal);
+            background: var(--soft-gray);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--deep-rose);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(183, 110, 121, 0.08);
+        }
+
+        .form-control.is-invalid {
+            border-color: #d9534f;
+            background: #fff6f6;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 70px;
+            font-family: var(--font-sans);
+        }
+
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23b0b0b0' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 38px;
+            cursor: pointer;
+        }
+
+        .error-message {
+            display: none;
+            color: #d9534f;
+            font-size: 0.76rem;
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Divider */
+        .form-divider {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 8px 0;
+            color: #b0b0b0;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .form-divider::before,
+        .form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #f0ebe5;
+        }
+
+        /* Live Preview */
+        .preview-sticky {
+            position: sticky;
+            top: 96px;
+        }
+
+        .live-preview-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 22px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(201, 168, 124, 0.15);
+        }
+
+        .live-preview-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8a8a8a;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .live-preview-label i {
+            color: var(--deep-rose);
+        }
+
+        .invitation-preview {
+            border-radius: var(--border-radius-sm);
+            padding: 44px 32px;
+            text-align: center;
+            min-height: 440px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invitation-preview.align-left {
+            text-align: left;
+        }
+
+        .invitation-preview.align-right {
+            text-align: right;
+        }
+
+        .inv-ornament {
+            color: var(--gold);
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+            opacity: 0.8;
+        }
+
+        .inv-names {
+            font-family: var(--font-script);
+            font-size: 2.8rem;
+            color: var(--deep-rose);
+            line-height: 1.15;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .inv-together {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: #8a8a8a;
+            margin-bottom: 18px;
+            font-weight: 500;
+        }
+
+        .inv-divider {
+            width: 80px;
+            height: 1px;
+            background: var(--gold);
+            margin: 16px auto;
+            position: relative;
+        }
+
+        .invitation-preview.align-left .inv-divider {
+            margin-left: 0;
+        }
+
+        .invitation-preview.align-right .inv-divider {
+            margin-right: 0;
+        }
+
+        .inv-divider::after {
+            content: '❦';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: inherit;
+            color: var(--gold);
+            padding: 0 10px;
+            font-size: 0.7rem;
+            border-radius: 20px;
+        }
+
+        .inv-date {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .inv-time {
+            font-size: 0.85rem;
+            color: #6b6b6b;
+            letter-spacing: 1.5px;
+            margin-bottom: 18px;
+        }
+
+        .inv-venue {
+            font-size: 0.88rem;
+            color: #5e5e5e;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+
+        .inv-address {
+            font-size: 0.8rem;
+            color: #8a8a8a;
+            font-weight: 300;
+            margin-bottom: 18px;
+            font-style: italic;
+        }
+
+        .inv-message {
+            font-size: 0.88rem;
+            color: #6b6b6b;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.6;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
+        .invitation-preview.align-left .inv-message {
+            margin-left: 0;
+        }
+
+        .invitation-preview.align-right .inv-message {
+            margin-right: 0;
+        }
+
+        .inv-families {
+            font-size: 0.78rem;
+            color: #8a8a8a;
+            margin-top: 16px;
+            font-weight: 300;
+        }
+
+        .inv-rsvp {
+            margin-top: 20px;
+            font-size: 0.78rem;
+            color: #6b6b6b;
+            letter-spacing: 0.5px;
+        }
+
+        /* Preview background styles */
+        .bg-default {
+            background: linear-gradient(135deg, #fdf6f0 0%, #f8e8e8 100%);
+        }
+
+        .bg-floral {
+            background: linear-gradient(135deg, #f1f8e9 0%, #fce4ec 100%);
+        }
+
+        .bg-royal {
+            background: linear-gradient(135deg, #f3e5f5 0%, #ede7f6 100%);
+        }
+
+        .bg-minimal {
+            background: #fafafa;
+        }
+
+        .bg-gold {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 100%);
+        }
+
+        /* ============================================================
+       EVENTS SECTION
+       ============================================================ */
+        .events-section {
+            margin-bottom: 56px;
+        }
+
+        .events-panel {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(201, 168, 124, 0.1);
+        }
+
+        .events-panel h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 6px;
+        }
+
+        .events-panel .subtitle {
+            color: #8a8a8a;
+            font-size: 0.88rem;
+            margin-bottom: 22px;
+            font-weight: 300;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1.2fr auto;
+            gap: 12px;
+            align-items: end;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 992px) {
+            .events-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .events-grid>*:nth-child(5) {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .events-grid>*:nth-child(5) {
+                grid-column: auto;
+            }
+        }
+
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--soft-gray);
+            border-radius: 14px;
+            border: 1px solid #f0ebe5;
+            transition: var(--transition);
+        }
+
+        .event-item:hover {
+            background: var(--blush);
+            border-color: var(--gold);
+        }
+
+        .event-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--deep-rose);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .event-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .event-info h5 {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 2px;
+        }
+
+        .event-info p {
+            font-size: 0.8rem;
+            color: #8a8a8a;
+            font-weight: 300;
+        }
+
+        .event-delete {
+            background: none;
+            border: none;
+            color: #b0b0b0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .event-delete:hover {
+            color: #d9534f;
+            background: #fff0f0;
+        }
+
+        .events-empty {
+            text-align: center;
+            padding: 32px 16px;
+            color: #b0b0b0;
+            font-size: 0.88rem;
+        }
+
+        .events-empty i {
+            font-size: 1.8rem;
+            color: var(--gold);
+            opacity: 0.5;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* ============================================================
+       RSVP SECTION
+       ============================================================ */
+        .rsvp-section {
+            margin-bottom: 56px;
+        }
+
+        .rsvp-panel {
+            background: linear-gradient(135deg, var(--blush) 0%, var(--champagne) 100%);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .rsvp-panel h3 {
+            font-family: var(--font-serif);
+            font-size: 1.7rem;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .rsvp-panel .subtitle {
+            color: #6b6b6b;
+            font-size: 0.95rem;
+            margin-bottom: 26px;
+            font-weight: 300;
+        }
+
+        .rsvp-form {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr auto;
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: end;
+            text-align: left;
+        }
+
+        @media (max-width: 992px) {
+            .rsvp-form {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .rsvp-form>*:nth-child(4) {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .rsvp-form {
+                grid-template-columns: 1fr;
+            }
+
+            .rsvp-form>*:nth-child(4) {
+                grid-column: auto;
+            }
+        }
+
+        .rsvp-form .form-group label {
+            color: #5e5e5e;
+        }
+
+        .rsvp-form .form-control {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(201, 168, 124, 0.3);
+        }
+
+        .rsvp-form .form-control:focus {
+            background: var(--white);
+        }
+
+        /* ============================================================
+       ACTION BUTTONS BAR
+       ============================================================ */
+        .action-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 28px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(201, 168, 124, 0.1);
+            margin-bottom: 56px;
+        }
+
+        .action-bar .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ============================================================
+       TOAST
+       ============================================================ */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: var(--charcoal);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 14px;
+            box-shadow: var(--shadow-xl);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 3000;
+            transform: translateY(120%);
+            transition: transform 0.35s ease;
+            max-width: 360px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        .toast i {
+            color: var(--gold);
+        }
+
+        .toast.error i {
+            color: #ef9a9a;
+        }
+
+        @media (max-width: 640px) {
+            .toast {
+                right: 16px;
+                left: 16px;
+                max-width: none;
+            }
+        }
+
+        /* ============================================================
+       TEMPLATE PREVIEW MODAL
+       ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 520px;
+            max-height: 92vh;
+            overflow-y: auto;
+            padding: 32px;
+            transform: translateY(20px) scale(0.98);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.show .modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #8a8a8a;
+            cursor: pointer;
+            padding: 4px;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--deep-rose);
+            transform: rotate(90deg);
+        }
+
+        .modal-preview {
+            border-radius: var(--border-radius-sm);
+            padding: 44px 28px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+        }
+
+        /* ============================================================
+       FOOTER — MASTER FOOTER FROM index.html
+       ============================================================ */
+        .footer {
+            background: var(--charcoal);
+            color: #dadada;
+            padding: 64px 0 28px;
+            border-radius: 40px 40px 0 0;
+            margin-top: 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand .logo {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            color: #b0b0b0;
+            font-weight: 300;
+            max-width: 280px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 22px;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #b0b0b0;
+            font-weight: 300;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold);
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #3f3f3f;
+            padding-top: 24px;
+            text-align: center;
+            color: #8a8a8a;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============================================================
+       NAVBAR — MASTER HEADER (Home | Features | Vendors | About | Contact)
+       This file lives in services/ so all root links use ../
+       ============================================================ -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Wedora<span>.</span></a>
+
+            <nav class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="../index.html">Home</a></li>
+                <li class="nav-item"><a href="../Pages/features.html">Features</a></li>
+                <li class="nav-item"><a href="vendors.html">Vendors</a></li>
+                <li class="nav-item"><a href="../Pages/about.html">About</a></li>
+                <li class="nav-item"><a href="../Pages/contact.html">Contact</a></li>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="../login.html" class="btn btn-outline">Login</a>
+                <a href="../register.html" class="btn btn-primary">Get Started</a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================================================
+       HERO SECTION
+       ============================================================ -->
+    <section class="invitations-hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <h1>Create Your Perfect <span>Wedding Invitation</span></h1>
+                    <p>Design beautiful digital wedding invitations in minutes. Choose a template, personalise it with
+                        your details, and share it with your loved ones.</p>
+                    <div class="hero-buttons">
+                        <a href="#builder" class="btn btn-primary">
+                            <i class="fas fa-pen-fancy"></i> Create Invitation
+                        </a>
+                        <a href="#templates" class="btn btn-outline">
+                            <i class="fas fa-images"></i> View Templates
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-invite">
+                    <div class="invite-script" id="heroNames">Brijesh &amp; Priya</div>
+                    <div class="invite-together">Together with their families</div>
+                    <div class="invite-divider"></div>
+                    <div class="invite-date">25 December 2026</div>
+                    <div class="invite-time">7:00 PM onwards</div>
+                    <div class="invite-venue">The Grand Palace, Udaipur</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+       MAIN CONTENT
+       ============================================================ -->
+    <main class="invitations-wrapper">
+
+        <!-- ========== TEMPLATES ========== -->
+        <section class="templates-section" id="templates">
+            <div class="section-header">
+                <h2>Choose Your Template</h2>
+                <p>Pick a style that reflects your love story and wedding theme.</p>
+            </div>
+            <div class="templates-grid" id="templatesGrid">
+                <!-- Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- ========== BUILDER ========== -->
+        <section class="builder-section" id="builder">
+            <div class="section-header">
+                <h2>Invitation Builder</h2>
+                <p>Fill in your details and watch your invitation come to life instantly.</p>
+            </div>
+
+            <div class="builder-layout">
+                <!-- Form -->
+                <div class="builder-form-card">
+                    <h3>Your Details</h3>
+                    <p class="subtitle">All fields marked * are required</p>
+
+                    <form id="inviteForm" novalidate>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="brideName">Bride Name <span class="req">*</span></label>
+                                <input type="text" id="brideName" class="form-control" placeholder="e.g. Priya"
+                                    value="Priya">
+                                <div class="error-message" id="brideNameError">Bride name is required.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="groomName">Groom Name <span class="req">*</span></label>
+                                <input type="text" id="groomName" class="form-control" placeholder="e.g. Brijesh"
+                                    value="Brijesh">
+                                <div class="error-message" id="groomNameError">Groom name is required.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="weddingDate">Wedding Date <span class="req">*</span></label>
+                                <input type="date" id="weddingDate" class="form-control" value="2026-12-25">
+                                <div class="error-message" id="weddingDateError">Wedding date is required.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="weddingTime">Wedding Time</label>
+                                <input type="time" id="weddingTime" class="form-control" value="19:00">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="venueName">Venue Name</label>
+                                <input type="text" id="venueName" class="form-control"
+                                    placeholder="e.g. The Grand Palace" value="The Grand Palace">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="venueAddress">Venue Address</label>
+                                <input type="text" id="venueAddress" class="form-control"
+                                    placeholder="e.g. Lake Pichola, Udaipur" value="Lake Pichola, Udaipur">
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="coupleMessage">Couple Message</label>
+                                <textarea id="coupleMessage" class="form-control"
+                                    placeholder="A short message for your guests...">Together with their families, we invite you to celebrate our wedding.</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="brideFamily">Bride Family Name</label>
+                                <input type="text" id="brideFamily" class="form-control"
+                                    placeholder="e.g. Sharma Family" value="Sharma Family">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="groomFamily">Groom Family Name</label>
+                                <input type="text" id="groomFamily" class="form-control" placeholder="e.g. Patel Family"
+                                    value="Patel Family">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rsvpContact">RSVP Contact</label>
+                                <input type="text" id="rsvpContact" class="form-control"
+                                    placeholder="e.g. +91 98765 43210" value="+91 98765 43210">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="weddingWebsite">Wedding Website / Location</label>
+                                <input type="text" id="weddingWebsite" class="form-control"
+                                    placeholder="e.g. wedora.com/priya-brijesh" value="wedora.com/priya-brijesh">
+                            </div>
+
+                            <div class="form-divider">Design Options</div>
+
+                            <div class="form-group">
+                                <label for="inviteTheme">Invitation Theme</label>
+                                <select id="inviteTheme" class="form-control">
+                                    <option value="bg-default" selected>Blush &amp; Cream</option>
+                                    <option value="bg-floral">Floral Green</option>
+                                    <option value="bg-royal">Royal Lavender</option>
+                                    <option value="bg-gold">Golden Glow</option>
+                                    <option value="bg-minimal">Minimal White</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inviteFont">Font Style</label>
+                                <select id="inviteFont" class="form-control">
+                                    <option value="'Great Vibes', cursive" selected>Great Vibes (Script)</option>
+                                    <option value="'Dancing Script', cursive">Dancing Script</option>
+                                    <option value="'Cormorant Garamond', serif">Cormorant Garamond (Serif)</option>
+                                    <option value="'Jost', sans-serif">Jost (Sans-Serif)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inviteAlign">Text Alignment</label>
+                                <select id="inviteAlign" class="form-control">
+                                    <option value="center" selected>Center</option>
+                                    <option value="left">Left</option>
+                                    <option value="right">Right</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Live Preview -->
+                <div class="preview-sticky">
+                    <div class="live-preview-card">
+                        <div class="live-preview-label">
+                            <i class="fas fa-eye"></i> Live Preview
+                        </div>
+                        <div class="invitation-preview bg-default align-center" id="invitationPreview">
+                            <div class="inv-ornament">❦</div>
+                            <div class="inv-names" id="prevNames">Brijesh &amp; Priya</div>
+                            <div class="inv-together">Together with their families</div>
+                            <div class="inv-divider"></div>
+                            <div class="inv-date" id="prevDate">25 December 2026</div>
+                            <div class="inv-time" id="prevTime">7:00 PM</div>
+                            <div class="inv-venue" id="prevVenue">The Grand Palace</div>
+                            <div class="inv-address" id="prevAddress">Lake Pichola, Udaipur</div>
+                            <div class="inv-message" id="prevMessage">Together with their families, we invite you to
+                                celebrate our wedding.</div>
+                            <div class="inv-families" id="prevFamilies">Sharma Family &amp; Patel Family</div>
+                            <div class="inv-rsvp" id="prevRsvp">RSVP: +91 98765 43210</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== EVENTS ========== -->
+        <section class="events-section" id="events">
+            <div class="section-header">
+                <h2>Wedding Events</h2>
+                <p>Add all your pre-wedding and wedding ceremonies in one place.</p>
+            </div>
+
+            <div class="events-panel">
+                <h3>Add Event</h3>
+                <p class="subtitle">Create a timeline of your wedding celebrations.</p>
+
+                <div class="events-grid">
+                    <div class="form-group">
+                        <label for="eventName">Event Name</label>
+                        <select id="eventName" class="form-control">
+                            <option value="Haldi">Haldi</option>
+                            <option value="Mehndi">Mehndi</option>
+                            <option value="Sangeet">Sangeet</option>
+                            <option value="Wedding">Wedding</option>
+                            <option value="Reception">Reception</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDate">Date</label>
+                        <input type="date" id="eventDate" class="form-control" value="2026-12-24">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTime">Time</label>
+                        <input type="time" id="eventTime" class="form-control" value="10:00">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventVenue">Venue</label>
+                        <input type="text" id="eventVenue" class="form-control" placeholder="e.g. The Grand Palace">
+                    </div>
+                    <button class="btn btn-primary" id="addEventBtn" style="padding: 12px 20px;">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                </div>
+
+                <div class="events-list" id="eventsList">
+                    <!-- Rendered by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== RSVP ========== -->
+        <section class="rsvp-section" id="rsvp">
+            <div class="rsvp-panel">
+                <h3>RSVP</h3>
+                <p class="subtitle">Guests can confirm their attendance here.</p>
+
+                <form class="rsvp-form" id="rsvpForm" novalidate>
+                    <div class="form-group">
+                        <label for="rsvpName">Your Name</label>
+                        <input type="text" id="rsvpName" class="form-control" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="rsvpAttending">Attending?</label>
+                        <select id="rsvpAttending" class="form-control">
+                            <option value="yes">Yes, I'll be there</option>
+                            <option value="no">Sorry, can't make it</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rsvpGuests">Number of Guests</label>
+                        <input type="number" id="rsvpGuests" class="form-control" value="1" min="1" max="20">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Submit RSVP
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ========== ACTION BAR ========== -->
+        <div class="action-bar">
+            <button class="btn btn-primary" id="saveInviteBtn">
+                <i class="fas fa-save"></i> Save Invitation
+            </button>
+            <button class="btn btn-gold" id="downloadInviteBtn">
+                <i class="fas fa-download"></i> Download
+            </button>
+            <button class="btn btn-outline" id="shareInviteBtn">
+                <i class="fas fa-share-alt"></i> Share
+            </button>
+            <button class="btn btn-outline" id="copyLinkBtn">
+                <i class="fas fa-link"></i> Copy Link
+            </button>
+        </div>
+
+    </main>
+
+    <!-- ============================================================
+       FOOTER — MASTER FOOTER FROM index.html
+       ============================================================ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo">Wedora<span>.</span></a>
+                    <p>Plan your dream wedding with ease. Everything you need, beautifully organized.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../Pages/features.html">Features</a></li>
+                        <li><a href="vendors.html">Vendors</a></li>
+                        <li><a href="../Pages/about.html">About</a></li>
+                        <li><a href="../Pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="budget.html">Budget Planning</a></li>
+                        <li><a href="guests.html">Guest Management</a></li>
+                        <li><a href="vendors.html">Vendor Management</a></li>
+                        <li><a href="checklist.html">Wedding Checklist</a></li>
+                        <li><a href="catering.html">Catering</a></li>
+                        <li><a href="invitations.html">Invitations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <ul>
+                        <li><a href="../login.html">Login</a></li>
+                        <li><a href="../register.html">Register</a></li>
+                        <li><a href="../dashboard.html">Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Wedora. All rights reserved. Designed with love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+       TEMPLATE PREVIEW MODAL
+       ============================================================ -->
+    <div class="modal-overlay" id="tplModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="tplModalTitle">Template Preview</h3>
+                <button class="modal-close" id="tplModalClose" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-preview" id="tplModalPreview">
+                <!-- Filled by JS -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" id="tplModalCancel">Close</button>
+                <button class="btn btn-primary" id="tplModalUse">
+                    <i class="fas fa-check"></i> Use This Template
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastText">Saved!</span>
+    </div>
+
+    <!-- ============================================================
+       JAVASCRIPT — unchanged (invitation builder logic + hamburger)
+       ============================================================ -->
+    <script>
+        (function () {
+            'use strict';
+
+            /* ==========================================================
+               TEMPLATE DEFINITIONS
+               ========================================================== */
+            const TEMPLATES = [
+                { id: 'traditional', name: 'Traditional', theme: 'theme-traditional', bg: 'bg-gold', desc: 'Classic Indian wedding style with rich golden tones.', font: "'Cormorant Garamond', serif" },
+                { id: 'elegant', name: 'Elegant', theme: 'theme-elegant', bg: 'bg-default', desc: 'Soft blush and cream tones for a timeless feel.', font: "'Great Vibes', cursive" },
+                { id: 'floral', name: 'Floral', theme: 'theme-floral', bg: 'bg-floral', desc: 'Fresh botanical vibes with greenery accents.', font: "'Dancing Script', cursive" },
+                { id: 'royal', name: 'Royal', theme: 'theme-royal', bg: 'bg-royal', desc: 'Regal lavender and gold for a grand celebration.', font: "'Great Vibes', cursive" },
+                { id: 'minimal', name: 'Minimal', theme: 'theme-minimal', bg: 'bg-minimal', desc: 'Clean, understated design with lots of white space.', font: "'Jost', sans-serif" },
+                { id: 'modern', name: 'Modern', theme: 'theme-modern', bg: 'bg-minimal', desc: 'Contemporary geometric layout with cool tones.', font: "'Jost', sans-serif" },
+                { id: 'gujarati', name: 'Gujarati Wedding', theme: 'theme-gujarati', bg: 'bg-gold', desc: 'Warm, festive design inspired by Gujarati traditions.', font: "'Dancing Script', cursive" },
+                { id: 'hindu', name: 'Hindu Wedding', theme: 'theme-hindu', bg: 'bg-default', desc: 'Traditional Hindu motifs with a modern touch.', font: "'Cormorant Garamond', serif" }
+            ];
+
+            /* ==========================================================
+               STATE
+               ========================================================== */
+            let state = {
+                selectedTemplate: 'elegant',
+                events: [],
+                rsvps: [],
+                invite: {
+                    brideName: 'Priya',
+                    groomName: 'Brijesh',
+                    weddingDate: '2026-12-25',
+                    weddingTime: '19:00',
+                    venueName: 'The Grand Palace',
+                    venueAddress: 'Lake Pichola, Udaipur',
+                    coupleMessage: 'Together with their families, we invite you to celebrate our wedding.',
+                    brideFamily: 'Sharma Family',
+                    groomFamily: 'Patel Family',
+                    rsvpContact: '+91 98765 43210',
+                    weddingWebsite: 'wedora.com/priya-brijesh',
+                    inviteTheme: 'bg-default',
+                    inviteFont: "'Great Vibes', cursive",
+                    inviteAlign: 'center'
+                }
+            };
+
+            /* ==========================================================
+               LOCALSTORAGE
+               ========================================================== */
+            const STORAGE_KEY = 'wedora_invitations_state';
+
+            function loadState() {
+                try {
+                    const stored = localStorage.getItem(STORAGE_KEY);
+                    if (stored) {
+                        const parsed = JSON.parse(stored);
+                        if (parsed && typeof parsed === 'object') {
+                            if (parsed.invite) state.invite = Object.assign(state.invite, parsed.invite);
+                            if (Array.isArray(parsed.events)) state.events = parsed.events;
+                            if (Array.isArray(parsed.rsvps)) state.rsvps = parsed.rsvps;
+                            if (parsed.selectedTemplate) state.selectedTemplate = parsed.selectedTemplate;
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Could not load invitation state:', e);
+                }
+            }
+
+            function saveState() {
+                try {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                        invite: state.invite,
+                        events: state.events,
+                        rsvps: state.rsvps,
+                        selectedTemplate: state.selectedTemplate
+                    }));
+                } catch (e) {
+                    console.warn('Could not save invitation state:', e);
+                }
+            }
+
+            /* ==========================================================
+               UTILS
+               ========================================================== */
+            function escapeHtml(str) {
+                if (!str) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            function formatDateLong(dateStr) {
+                if (!dateStr) return '';
+                const d = new Date(dateStr);
+                if (isNaN(d.getTime())) return '';
+                return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+
+            function formatTime(timeStr) {
+                if (!timeStr) return '';
+                const [h, m] = timeStr.split(':');
+                let hour = parseInt(h, 10);
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12 || 12;
+                return hour + ':' + m + ' ' + ampm;
+            }
+
+            /* ==========================================================
+               TOAST
+               ========================================================== */
+            let toastTimer;
+            function showToast(message, isError) {
+                const toast = document.getElementById('toast');
+                const toastText = document.getElementById('toastText');
+                const icon = toast.querySelector('i');
+                toastText.textContent = message;
+                if (isError) {
+                    toast.classList.add('error');
+                    icon.className = 'fas fa-exclamation-circle';
+                } else {
+                    toast.classList.remove('error');
+                    icon.className = 'fas fa-check-circle';
+                }
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 2600);
+            }
+
+            /* ==========================================================
+               RENDER TEMPLATES
+               ========================================================== */
+            function renderTemplates() {
+                const grid = document.getElementById('templatesGrid');
+                grid.innerHTML = '';
+
+                TEMPLATES.forEach(tpl => {
+                    const card = document.createElement('div');
+                    card.className = 'template-card' + (state.selectedTemplate === tpl.id ? ' active' : '');
+                    card.innerHTML = `
+            <div class="template-preview ${tpl.theme}">
+              <div class="tp-inner">
+                <div class="tp-names">Brijesh &amp; Priya</div>
+                <div class="tp-sub">Together with their families</div>
+                <div class="tp-date">25.12.2026</div>
+              </div>
+            </div>
+            <div class="template-info">
+              <h4>${tpl.name}</h4>
+              <p>${tpl.desc}</p>
+              <div class="template-actions">
+                <button class="tpl-preview-btn" data-id="${tpl.id}">
+                  <i class="fas fa-eye"></i> Preview
+                </button>
+                <button class="tpl-use" data-id="${tpl.id}">
+                  <i class="fas fa-check"></i> Use
+                </button>
+              </div>
+            </div>
+          `;
+
+                    card.querySelector('.tpl-use').addEventListener('click', function () {
+                        selectTemplate(tpl.id);
+                    });
+                    card.querySelector('.tpl-preview-btn').addEventListener('click', function () {
+                        openTemplatePreview(tpl.id);
+                    });
+
+                    grid.appendChild(card);
+                });
+            }
+
+            function selectTemplate(id) {
+                state.selectedTemplate = id;
+                const tpl = TEMPLATES.find(t => t.id === id);
+                if (tpl) {
+                    state.invite.inviteTheme = tpl.bg;
+                    state.invite.inviteFont = tpl.font;
+                    document.getElementById('inviteTheme').value = tpl.bg;
+                    document.getElementById('inviteFont').value = tpl.font;
+                }
+                saveState();
+                renderTemplates();
+                updatePreview();
+                showToast(tpl.name + ' template applied!');
+            }
+
+            /* ==========================================================
+               TEMPLATE PREVIEW MODAL
+               ========================================================== */
+            const tplModal = document.getElementById('tplModal');
+            const tplModalPreview = document.getElementById('tplModalPreview');
+            const tplModalTitle = document.getElementById('tplModalTitle');
+            const tplModalUse = document.getElementById('tplModalUse');
+            let currentTplId = null;
+
+            function openTemplatePreview(id) {
+                const tpl = TEMPLATES.find(t => t.id === id);
+                if (!tpl) return;
+                currentTplId = id;
+                tplModalTitle.textContent = tpl.name + ' Template';
+
+                tplModalPreview.className = 'modal-preview ' + tpl.bg;
+                tplModalPreview.innerHTML = `
+          <div style="text-align:center;">
+            <div style="font-size:1.3rem; color:var(--gold); margin-bottom:8px;">❦</div>
+            <div style="font-family:${tpl.font}; font-size:2.4rem; color:var(--deep-rose); line-height:1.15; margin-bottom:8px;">
+              Brijesh &amp; Priya
+            </div>
+            <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:2.5px; color:#8a8a8a; margin-bottom:16px;">
+              Together with their families
+            </div>
+            <div style="width:70px; height:1px; background:var(--gold); margin:16px auto; position:relative;">
+              <span style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:inherit; color:var(--gold); padding:0 8px; font-size:0.6rem; border-radius:20px;">❦</span>
+            </div>
+            <div style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-weight:600; color:var(--charcoal); letter-spacing:2px; margin-bottom:4px;">
+              25 December 2026
+            </div>
+            <div style="font-size:0.85rem; color:#6b6b6b; letter-spacing:1.5px; margin-bottom:16px;">
+              7:00 PM
+            </div>
+            <div style="font-size:0.88rem; color:#5e5e5e; margin-bottom:4px;">
+              The Grand Palace
+            </div>
+            <div style="font-size:0.8rem; color:#8a8a8a; font-style:italic;">
+              Lake Pichola, Udaipur
+            </div>
+          </div>
+        `;
+
+                tplModal.classList.add('show');
+            }
+
+            function closeTplModal() {
+                tplModal.classList.remove('show');
+                currentTplId = null;
+            }
+
+            document.getElementById('tplModalClose').addEventListener('click', closeTplModal);
+            document.getElementById('tplModalCancel').addEventListener('click', closeTplModal);
+            tplModal.addEventListener('click', function (e) {
+                if (e.target === tplModal) closeTplModal();
+            });
+            tplModalUse.addEventListener('click', function () {
+                if (currentTplId) {
+                    selectTemplate(currentTplId);
+                    closeTplModal();
+                }
+            });
+
+            /* ==========================================================
+               FORM → PREVIEW SYNC
+               ========================================================== */
+            const formFields = {
+                brideName: 'brideName',
+                groomName: 'groomName',
+                weddingDate: 'weddingDate',
+                weddingTime: 'weddingTime',
+                venueName: 'venueName',
+                venueAddress: 'venueAddress',
+                coupleMessage: 'coupleMessage',
+                brideFamily: 'brideFamily',
+                groomFamily: 'groomFamily',
+                rsvpContact: 'rsvpContact',
+                weddingWebsite: 'weddingWebsite',
+                inviteTheme: 'inviteTheme',
+                inviteFont: 'inviteFont',
+                inviteAlign: 'inviteAlign'
+            };
+
+            function bindFormInputs() {
+                Object.keys(formFields).forEach(key => {
+                    const el = document.getElementById(formFields[key]);
+                    if (!el) return;
+                    el.addEventListener('input', function () {
+                        state.invite[key] = this.value;
+                        updatePreview();
+                        saveState();
+                    });
+                    el.addEventListener('change', function () {
+                        state.invite[key] = this.value;
+                        updatePreview();
+                        saveState();
+                    });
+                });
+            }
+
+            function setFormValues() {
+                Object.keys(formFields).forEach(key => {
+                    const el = document.getElementById(formFields[key]);
+                    if (!el) return;
+                    if (state.invite[key] !== undefined) {
+                        el.value = state.invite[key];
+                    }
+                });
+            }
+
+            /* ==========================================================
+               UPDATE PREVIEW
+               ========================================================== */
+            function updatePreview() {
+                const inv = state.invite;
+
+                const bride = (inv.brideName || '').trim() || 'Bride';
+                const groom = (inv.groomName || '').trim() || 'Groom';
+                document.getElementById('prevNames').innerHTML =
+                    escapeHtml(groom) + ' &amp; ' + escapeHtml(bride);
+
+                document.getElementById('prevDate').textContent =
+                    formatDateLong(inv.weddingDate) || 'Wedding Date';
+
+                document.getElementById('prevTime').textContent =
+                    formatTime(inv.weddingTime) || '';
+
+                document.getElementById('prevVenue').textContent =
+                    (inv.venueName || '').trim() || 'Venue';
+
+                document.getElementById('prevAddress').textContent =
+                    (inv.venueAddress || '').trim() || '';
+
+                document.getElementById('prevMessage').textContent =
+                    (inv.coupleMessage || '').trim() || '';
+
+                const bf = (inv.brideFamily || '').trim();
+                const gf = (inv.groomFamily || '').trim();
+                const famText = [gf, bf].filter(Boolean).join(' & ');
+                document.getElementById('prevFamilies').textContent = famText;
+
+                const rsvp = (inv.rsvpContact || '').trim();
+                document.getElementById('prevRsvp').textContent = rsvp ? 'RSVP: ' + rsvp : '';
+
+                const preview = document.getElementById('invitationPreview');
+                preview.className = 'invitation-preview';
+                preview.classList.add(inv.inviteTheme || 'bg-default');
+                preview.classList.add('align-' + (inv.inviteAlign || 'center'));
+
+                const namesEl = document.getElementById('prevNames');
+                namesEl.style.fontFamily = inv.inviteFont || "'Great Vibes', cursive";
+
+                document.getElementById('heroNames').innerHTML =
+                    escapeHtml(groom) + ' &amp; ' + escapeHtml(bride);
+            }
+
+            /* ==========================================================
+               EVENTS MANAGEMENT
+               ========================================================== */
+            function renderEvents() {
+                const list = document.getElementById('eventsList');
+                list.innerHTML = '';
+
+                if (state.events.length === 0) {
+                    list.innerHTML = `
+            <div class="events-empty">
+              <i class="fas fa-calendar-plus"></i>
+              <p>No events added yet. Add your first event above!</p>
+            </div>
+          `;
+                    return;
+                }
+
+                state.events.forEach((ev, idx) => {
+                    const item = document.createElement('div');
+                    item.className = 'event-item';
+                    const icons = {
+                        Haldi: 'fa-sun',
+                        Mehndi: 'fa-hand-sparkles',
+                        Sangeet: 'fa-music',
+                        Wedding: 'fa-ring',
+                        Reception: 'fa-glass-cheers'
+                    };
+                    const icon = icons[ev.name] || 'fa-calendar-day';
+                    item.innerHTML = `
+            <div class="event-icon"><i class="fas ${icon}"></i></div>
+            <div class="event-info">
+              <h5>${escapeHtml(ev.name)}</h5>
+              <p>
+                <i class="fas fa-calendar-alt"></i> ${formatDateLong(ev.date)}
+                ${ev.time ? ' · ' + formatTime(ev.time) : ''}
+                ${ev.venue ? ' · ' + escapeHtml(ev.venue) : ''}
+              </p>
+            </div>
+            <button class="event-delete" data-idx="${idx}" aria-label="Delete event">
+              <i class="fas fa-trash"></i>
+            </button>
+          `;
+                    item.querySelector('.event-delete').addEventListener('click', function () {
+                        const i = parseInt(this.getAttribute('data-idx'), 10);
+                        deleteEvent(i);
+                    });
+                    list.appendChild(item);
+                });
+            }
+
+            function addEvent() {
+                const name = document.getElementById('eventName').value;
+                const date = document.getElementById('eventDate').value;
+                const time = document.getElementById('eventTime').value;
+                const venue = document.getElementById('eventVenue').value.trim();
+
+                if (!date) {
+                    showToast('Please select an event date.', true);
+                    return;
+                }
+
+                state.events.push({ name, date, time, venue });
+                state.events.sort((a, b) => new Date(a.date) - new Date(b.date));
+                saveState();
+                renderEvents();
+                document.getElementById('eventVenue').value = '';
+                showToast(name + ' event added!');
+            }
+
+            function deleteEvent(idx) {
+                const ev = state.events[idx];
+                if (!ev) return;
+                if (confirm('Delete "' + ev.name + '" event?')) {
+                    state.events.splice(idx, 1);
+                    saveState();
+                    renderEvents();
+                    showToast('Event deleted.');
+                }
+            }
+
+            document.getElementById('addEventBtn').addEventListener('click', addEvent);
+
+            /* ==========================================================
+               RSVP
+               ========================================================== */
+            document.getElementById('rsvpForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const name = document.getElementById('rsvpName').value.trim();
+                const attending = document.getElementById('rsvpAttending').value;
+                const guests = parseInt(document.getElementById('rsvpGuests').value, 10) || 1;
+
+                if (!name) {
+                    showToast('Please enter your name.', true);
+                    return;
+                }
+
+                state.rsvps.push({
+                    name: name,
+                    attending: attending,
+                    guests: guests,
+                    submittedAt: new Date().toISOString()
+                });
+                saveState();
+
+                document.getElementById('rsvpName').value = '';
+                document.getElementById('rsvpGuests').value = 1;
+
+                showToast(attending === 'yes'
+                    ? 'Thank you, ' + name + '! See you at the wedding 💕'
+                    : 'Thank you for letting us know, ' + name + '.');
+            });
+
+            /* ==========================================================
+               ACTION BUTTONS
+               ========================================================== */
+            document.getElementById('saveInviteBtn').addEventListener('click', function () {
+                saveState();
+                showToast('Invitation saved successfully!');
+            });
+
+            document.getElementById('downloadInviteBtn').addEventListener('click', function () {
+                const inv = state.invite;
+                const bride = (inv.brideName || '').trim() || 'Bride';
+                const groom = (inv.groomName || '').trim() || 'Groom';
+                const text = [
+                    '═══════════════════════════════════════',
+                    '         WEDDING INVITATION',
+                    '═══════════════════════════════════════',
+                    '',
+                    `      ${groom} & ${bride}`,
+                    '',
+                    'Together with their families,',
+                    '',
+                    inv.coupleMessage || 'invite you to celebrate their wedding.',
+                    '',
+                    '───────────────────────────────────────',
+                    `Date: ${formatDateLong(inv.weddingDate)}`,
+                    `Time: ${formatTime(inv.weddingTime)}`,
+                    `Venue: ${inv.venueName || ''}`,
+                    `Address: ${inv.venueAddress || ''}`,
+                    '───────────────────────────────────────',
+                    '',
+                    `RSVP: ${inv.rsvpContact || ''}`,
+                    `Website: ${inv.weddingWebsite || ''}`,
+                    '',
+                    '═══════════════════════════════════════',
+                    '           Made with Wedora',
+                    '═══════════════════════════════════════'
+                ].join('\n');
+
+                const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'wedding-invitation.txt';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                showToast('Invitation downloaded!');
+            });
+
+            document.getElementById('shareInviteBtn').addEventListener('click', function () {
+                const inv = state.invite;
+                const bride = (inv.brideName || '').trim() || 'Bride';
+                const groom = (inv.groomName || '').trim() || 'Groom';
+                const shareText = `You're invited to the wedding of ${groom} & ${bride} on ${formatDateLong(inv.weddingDate)} at ${inv.venueName}. RSVP: ${inv.rsvpContact}`;
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Wedding Invitation',
+                        text: shareText
+                    }).then(() => {
+                        showToast('Shared successfully!');
+                    }).catch(() => { });
+                } else {
+                    copyToClipboard(shareText);
+                    showToast('Invitation details copied to clipboard!');
+                }
+            });
+
+            document.getElementById('copyLinkBtn').addEventListener('click', function () {
+                const inv = state.invite;
+                const link = 'https://' + (inv.weddingWebsite || 'wedora.com/invite').replace(/^https?:\/\//, '');
+                copyToClipboard(link);
+                showToast('Invitation link copied!');
+            });
+
+            function copyToClipboard(text) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).catch(() => {
+                        fallbackCopy(text);
+                    });
+                } else {
+                    fallbackCopy(text);
+                }
+            }
+
+            function fallbackCopy(text) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                } catch (e) { /* ignore */ }
+                document.body.removeChild(ta);
+            }
+
+            /* ==========================================================
+               FORM VALIDATION
+               ========================================================== */
+            document.getElementById('inviteForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+            });
+
+            /* ==========================================================
+               HAMBURGER MENU
+               ========================================================== */
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            hamburger.addEventListener('click', function (e) {
+                e.stopPropagation();
+                navMenu.classList.toggle('open');
+                const icon = hamburger.querySelector('i');
+                if (navMenu.classList.contains('open')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', function () {
+                    if (window.innerWidth <= 992) {
+                        navMenu.classList.remove('open');
+                        const icon = hamburger.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            document.addEventListener('click', function (e) {
+                if (window.innerWidth <= 992 && navMenu.classList.contains('open')) {
+                    if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                        navMenu.classList.remove('open');
+                        const icon = hamburger.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+
+            /* ==========================================================
+               ESC KEY
+               ========================================================== */
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && tplModal.classList.contains('show')) {
+                    closeTplModal();
+                }
+            });
+
+            /* ==========================================================
+               INIT
+               ========================================================== */
+            function init() {
+                loadState();
+                setFormValues();
+                bindFormInputs();
+                renderTemplates();
+                renderEvents();
+                updatePreview();
+            }
+
+            init();
+
+        })();
+    </script>
+
+</body>
+
+</html>
